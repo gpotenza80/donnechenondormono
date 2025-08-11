@@ -41,7 +41,7 @@ const tracks = [
   },
   {
     title: "Donne che non dormono",
-    cover: "/placeholder.svg",
+    cover: "/lovable-uploads/bb3417b8-b4b4-4aa5-af08-e9faf1fa9ae6.png",
     url: soundcloudAlbumUrl,
   },
 ] as const;
