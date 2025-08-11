@@ -1,13 +1,18 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import AlbumHero from "@/components/AlbumHero";
+import ConceptSection from "@/components/ConceptSection";
+import TrackGrid from "@/components/TrackGrid";
+import PressSection from "@/components/PressSection";
+import SiteFooter from "@/components/SiteFooter";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main id="top" className="min-h-screen bg-background">
+      <AlbumHero />
+      <ConceptSection />
+      <TrackGrid />
+      <PressSection />
+      <SiteFooter />
+    </main>
   );
 };
 

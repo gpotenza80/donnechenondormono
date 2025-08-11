@@ -18,6 +18,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // New beautiful hero gradient variant using design tokens
+        hero: "text-primary-foreground bg-[var(--gradient-primary)] shadow-lg hover:opacity-95",
       },
       size: {
         default: "h-10 px-4 py-2",
