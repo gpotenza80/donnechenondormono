@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 const NAV_LINKS = [
   { href: "#ascolta", label: "Ascolta" },
   { href: "#concept", label: "Concept" },
-  { href: "#press", label: "Press Kit" },
+  { href: "#chi-sono", label: "Chi sono" },
 ];
 
 export default function AlbumHero() {

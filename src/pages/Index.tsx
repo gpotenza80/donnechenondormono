@@ -1,7 +1,7 @@
 import AlbumHero from "@/components/AlbumHero";
 import ConceptSection from "@/components/ConceptSection";
 import TrackGrid from "@/components/TrackGrid";
-import PressSection from "@/components/PressSection";
+import AboutSection from "@/components/PressSection";
 import SiteFooter from "@/components/SiteFooter";
 
 const Index = () => {
@@ -10,7 +10,7 @@ const Index = () => {
       <AlbumHero />
       <ConceptSection />
       <TrackGrid />
-      <PressSection />
+      <AboutSection />
       <SiteFooter />
     </main>
   );

@@ -6,7 +6,7 @@ export default function SiteFooter() {
         <nav className="flex items-center gap-4">
           <a className="hover:underline underline-offset-4" href="#ascolta">Ascolta</a>
           <a className="hover:underline underline-offset-4" href="#concept">Concept</a>
-          <a className="hover:underline underline-offset-4" href="#press">Press Kit</a>
+          <a className="hover:underline underline-offset-4" href="#chi-sono">Chi sono</a>
         </nav>
       </div>
     </footer>
