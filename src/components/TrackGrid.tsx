@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-const soundcloudAlbumUrl = "https://on.soundcloud.com/EeW4KykuGF4zC6Y7no";
+const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secret_token=s-PWvlpNWPDGi";
 
 const tracks = [
   {
