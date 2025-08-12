@@ -68,7 +68,7 @@ const tracks = [
     url: soundcloudAlbumUrl,
     caption:
       "05:00 - Londra 2000 — Ballata poetica e malinconica. Uno sguardo sullo spirito dei vent’anni, tra ironia e disillusione. Delicata e riflessiva.",
-    embedSrc: undefined,
+    embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141004411%3Fsecret_token%3Ds-1K5ZKSg7pOO&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
 ] as const;
 
