@@ -37,13 +37,14 @@ const tracks = [
       "02:00 - Ja, Fa’ pace cu mmé — Dialogo intimo, tenero e poetico. Una canzone da camera, emotiva, con potenziale vocale per interpreti teatrali o cinematografici.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141002701%3Fsecret_token%3Ds-f15KZWPZ3ip&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
-  {
+   {
     title: "Le mie catene",
     cover: "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
     url: soundcloudAlbumUrl,
     caption:
       "03:00 - Le mie catene — Testo forte e viscerale. Esprime dolore, desiderio di libertà e ribellione esistenziale. Atmosfera poetica e drammatica.",
-    embedSrc: undefined,
+    embedSrc:
+      "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141003151%3Fsecret_token%3Ds-53BKwkN2xey&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Pena - Español",
