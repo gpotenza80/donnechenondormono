@@ -360,6 +360,21 @@ export default function TrackGrid() {
       <section id="ascolta" className="container mx-auto py-16 md:py-24">
       <div className="grid gap-10">
 
+        {/* Playlist SoundCloud principale */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4">Ascolta l'album completo</h3>
+          <iframe
+            title="Donne che non dormono — Playlist completa"
+            width="100%"
+            height="400"
+            scrolling="no"
+            frameBorder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2050729731%3Fsecret_token%3Ds-PWvlpNWPDGi&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            className="rounded-lg"
+          />
+        </div>
+
         <div>
           <h3 className="text-xl font-semibold mb-4">Tracce</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
