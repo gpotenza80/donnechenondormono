@@ -270,6 +270,12 @@ export default function TrackGrid() {
     }
   };
 
+  useEffect(() => {
+    const handler = () => handleCoverClick(0);
+    window.addEventListener("play-first-track", handler as any);
+    return () => window.removeEventListener("play-first-track", handler as any);
+  }, []);
+
   const formatMs = (ms: number) => {
     const total = Math.max(0, Math.floor((ms || 0) / 1000));
     const m = Math.floor(total / 60);

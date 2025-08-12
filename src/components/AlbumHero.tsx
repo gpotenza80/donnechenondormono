@@ -18,6 +18,10 @@ export default function AlbumHero() {
     setSpot({ x, y });
   }, []);
 
+  const playFirst = useCallback(() => {
+    window.dispatchEvent(new CustomEvent("play-first-track"));
+  }, []);
+
   return (
     <header className="relative overflow-hidden">
       <nav className="container mx-auto flex items-center justify-between py-6">
@@ -47,7 +51,7 @@ export default function AlbumHero() {
             Un concept autoriale di JackPot (Giovanni Potenza). Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#ascolta">
+            <a href="#ascolta" onClick={playFirst}>
               <Button variant="hero" size="lg">Ascolta l’album</Button>
             </a>
             <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">
