@@ -10,23 +10,13 @@ const tracks = [
     url: soundcloudAlbumUrl,
   },
   {
-    title: "BAMBENÈLLA",
-    cover: "/lovable-uploads/809f9868-c327-48a9-97ae-507c4f940dd2.png",
-    url: soundcloudAlbumUrl,
-  },
-  {
-    title: "Londra 2000",
-    cover: "/lovable-uploads/a987e938-ebfb-45fc-a615-15783e121b2f.png",
-    url: soundcloudAlbumUrl,
-  },
-  {
     title: "ADDÀ PASSÀ",
     cover: "/lovable-uploads/4d6c9b26-e1af-4cd8-83d1-67bdbfceffce.png",
     url: soundcloudAlbumUrl,
   },
   {
-    title: "Le mie catene",
-    cover: "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
+    title: "Bambenella",
+    cover: "/lovable-uploads/809f9868-c327-48a9-97ae-507c4f940dd2.png",
     url: soundcloudAlbumUrl,
   },
   {
@@ -35,13 +25,23 @@ const tracks = [
     url: soundcloudAlbumUrl,
   },
   {
-    title: "PENA",
+    title: "Le mie catene",
+    cover: "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
+    url: soundcloudAlbumUrl,
+  },
+  {
+    title: "Pena - Español",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     url: soundcloudAlbumUrl,
   },
   {
-    title: "Donne che non dormono",
-    cover: "/lovable-uploads/bb3417b8-b4b4-4aa5-af08-e9faf1fa9ae6.png",
+    title: "Pena - Italiano",
+    cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
+    url: soundcloudAlbumUrl,
+  },
+  {
+    title: "Londra 2000",
+    cover: "/lovable-uploads/a987e938-ebfb-45fc-a615-15783e121b2f.png",
     url: soundcloudAlbumUrl,
   },
 ] as const;
