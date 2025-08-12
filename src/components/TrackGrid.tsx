@@ -321,6 +321,27 @@ export default function TrackGrid() {
     return () => { try { delete (window as any).playFirstAlbumTrack; } catch {} };
   }, []);
 
+  useEffect(() => {
+    const handler = (e: any) => {
+      const idx = Math.max(0, Math.min(tracks.length - 1, e?.detail?.index ?? 0));
+      try { console.log('[TrackGrid] event: play-track-index', idx); } catch {}
+      handleCoverClick(idx);
+      setTimeout(() => handleCoverClick(idx), 120);
+    };
+    window.addEventListener("play-track-index", handler as any);
+    return () => window.removeEventListener("play-track-index", handler as any);
+  }, []);
+
+  useEffect(() => {
+    (window as any).playAlbumTrack = (idx: number) => {
+      const clamped = Math.max(0, Math.min(tracks.length - 1, idx | 0));
+      try { console.log('[TrackGrid] window.playAlbumTrack', clamped); } catch {}
+      handleCoverClick(clamped);
+      setTimeout(() => handleCoverClick(clamped), 120);
+    };
+    return () => { try { delete (window as any).playAlbumTrack; } catch {} };
+  }, []);
+
   const formatMs = (ms: number) => {
     const total = Math.max(0, Math.floor((ms || 0) / 1000));
     const m = Math.floor(total / 60);

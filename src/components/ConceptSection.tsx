@@ -1,4 +1,7 @@
 export default function ConceptSection() {
+  const hours = ["22:00","23:00","00:00","01:00","02:00","03:00","04:00"] as const;
+  // Map hours to track indices in TrackGrid (skip 3:00 IT to hit ES; 04:00 -> Londra 2000)
+  const hourToIndex = [0,1,2,3,4,5,7];
   return (
     <section id="concept" className="container mx-auto pt-2 md:pt-3 lg:pt-4 pb-10 md:pb-14 lg:pb-18">
       <div className="max-w-[760px] space-y-6">
@@ -16,23 +19,26 @@ export default function ConceptSection() {
           <div className="relative">
             <div className="absolute inset-0 rounded-full opacity-30 blur-3xl" style={{ background: "var(--gradient-primary)" }} />
             <ol className="relative z-10 flex flex-wrap gap-3 md:gap-4 items-center">
-              {[
-                "22:00",
-                "23:00",
-                "00:00",
-                "01:00",
-                "02:00",
-                "03:00",
-                "04:00",
-              ].map((h) => (
-                <a
-                  href="#brani"
-                  className="chip"
-                  aria-label={`Vai ai brani (ora ${h})`}
-                >
-                  {h}
-                </a>
-              ))}
+              {hours.map((h, i) => {
+                const idx = hourToIndex[i];
+                return (
+                  <li key={h}>
+                    <a
+                      href="#brani"
+                      className="chip"
+                      aria-label={`Vai al brano delle ${h}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        try { (window as any).playAlbumTrack?.(idx); } catch {}
+                        try { window.dispatchEvent(new CustomEvent("play-track-index", { detail: { index: idx } })); } catch {}
+                        document.getElementById("brani")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }}
+                    >
+                      {h}
+                    </a>
+                  </li>
+                );
+              })}
             </ol>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
