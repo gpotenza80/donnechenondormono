@@ -200,6 +200,23 @@ export default function TrackGrid() {
     }
   };
 
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!playlistWidgetRef.current || !duration) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const seekPosition = percentage * duration;
+    
+    console.log('[TrackGrid] Seeking to position:', seekPosition);
+    try {
+      playlistWidgetRef.current.seekTo(seekPosition);
+      setPosition(percentage);
+    } catch (error) {
+      console.error('[TrackGrid] Error seeking:', error);
+    }
+  };
+
   // Event listeners per controlli esterni
   useEffect(() => {
     const handler = () => {
@@ -286,7 +303,12 @@ export default function TrackGrid() {
                       {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
                     </span>
                   </div>
-                  <Progress value={position * 100} className="h-1" />
+                  <div 
+                    onClick={handleProgressClick}
+                    className="cursor-pointer"
+                  >
+                    <Progress value={position * 100} className="h-1" />
+                  </div>
                 </div>
               </div>
             </div>
