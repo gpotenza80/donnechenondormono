@@ -58,36 +58,21 @@ export default function AlbumHero() {
             Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Button asChild variant="hero" size="lg" className="h-12 min-w-[180px] md:min-w-[200px]">
+            <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-12 min-w-[180px] md:min-w-[200px]">
+            <Button asChild variant="outline" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
             </Button>
           </div>
           </div>
 
-        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border bg-muted" style={{ boxShadow: "var(--shadow-soft)" }}>
+        <div className="relative">
           <img
             src={heroImage}
             alt="Copertina concettuale notturna, tonalità viola e ciano per l’album Donne che non dormono"
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-contain"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(600px circle at var(--spot-x,50%) var(--spot-y,50%), hsl(var(--brand) / 0.25), transparent 55%)",
-            }}
-          />
-          
-          <div
-            className="absolute inset-0"
-            style={{
-              ["--spot-x" as any]: `${spot.x}%`,
-              ["--spot-y" as any]: `${spot.y}%`,
-            } as React.CSSProperties}
+            className="w-full h-auto"
           />
         </div>
       </div>
