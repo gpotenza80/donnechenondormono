@@ -91,6 +91,7 @@ export default function TrackGrid() {
   const boundSet = useRef<Set<number>>(new Set());
   const [durations, setDurations] = useState<number[]>(Array(tracks.length).fill(0));
   const [positions, setPositions] = useState<number[]>(Array(tracks.length).fill(0));
+  const pendingPlayIndex = useRef<number | null>(null);
 
   useEffect(() => {
     if ((window as any).SC?.Widget) {
@@ -145,9 +146,19 @@ export default function TrackGrid() {
     });
   }, [scReady]);
 
+  useEffect(() => {
+    if (!scReady) return;
+    if (pendingPlayIndex.current != null) {
+      const i = pendingPlayIndex.current;
+      pendingPlayIndex.current = null;
+      setTimeout(() => handleCoverClick(i), 0);
+    }
+  }, [scReady]);
+
   const handleCoverClick = (idx: number) => {
     const track = tracks[idx];
-    if (!track.embedSrc || !scReady) return;
+    if (!track.embedSrc) return;
+    if (!scReady) { pendingPlayIndex.current = idx; return; }
 
     // Pause all others
     widgetRefs.current.forEach((w, i) => {
@@ -247,7 +258,6 @@ export default function TrackGrid() {
                     <img
                       src={t.cover}
                       alt={`Copertina brano ${t.title} — Donne che non dormono`}
-                      loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     {t.embedSrc && (
@@ -314,7 +324,7 @@ export default function TrackGrid() {
                       scrolling="no"
                       frameBorder="no"
                       allow="autoplay"
-                      loading="lazy"
+                      
                       src={t.embedSrc}
                       className="sr-only"
                       aria-hidden="true"
