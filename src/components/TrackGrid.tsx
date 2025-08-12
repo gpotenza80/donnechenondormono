@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 
 const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secret_token=s-PWvlpNWPDGi";
@@ -91,6 +91,7 @@ export default function TrackGrid() {
   const boundSet = useRef<Set<number>>(new Set());
   const [durations, setDurations] = useState<number[]>(Array(tracks.length).fill(0));
   const [positions, setPositions] = useState<number[]>(Array(tracks.length).fill(0));
+  const [paused, setPaused] = useState<boolean[]>(Array(tracks.length).fill(true));
   const pendingPlayIndex = useRef<number | null>(null);
 
   useEffect(() => {
@@ -125,6 +126,13 @@ export default function TrackGrid() {
             });
           } catch {}
         });
+        w.bind(E.PLAY, () => {
+          setPlayingIndex(i);
+          setPaused((prev) => { const next = [...prev]; next[i] = false; return next; });
+        });
+        w.bind(E.PAUSE, () => {
+          setPaused((prev) => { const next = [...prev]; next[i] = true; return next; });
+        });
         w.bind(E.PLAY_PROGRESS, (e: any) => {
           const pos = e?.currentPosition ?? 0;
           setPositions((prev) => {
@@ -134,12 +142,27 @@ export default function TrackGrid() {
           });
         });
         w.bind(E.FINISH, () => {
-          setPlayingIndex((pi) => (pi === i ? null : pi));
-          setPositions((prev) => {
-            const next = [...prev];
-            next[i] = 0;
-            return next;
-          });
+          setPositions((prev) => { const next = [...prev]; next[i] = 0; return next; });
+          setPaused((prev) => { const next = [...prev]; next[i] = true; return next; });
+          const nextIdx = i + 1;
+          if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
+            let nextW = widgetRefs.current[nextIdx];
+            if (!nextW && iframeRefs.current[nextIdx]) {
+              try {
+                nextW = (window as any).SC?.Widget(iframeRefs.current[nextIdx]!);
+                if (nextW) widgetRefs.current[nextIdx] = nextW;
+              } catch {}
+            }
+            if (nextW) {
+              try { nextW.play(); } catch {}
+              setPlayingIndex(nextIdx);
+              setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
+            } else {
+              setPlayingIndex(null);
+            }
+          } else {
+            setPlayingIndex(null);
+          }
         });
         boundSet.current.add(i);
       } catch {}
@@ -191,6 +214,13 @@ export default function TrackGrid() {
             });
           } catch {}
         });
+        target.bind(E.PLAY, () => {
+          setPlayingIndex(idx);
+          setPaused((prev) => { const next = [...prev]; next[idx] = false; return next; });
+        });
+        target.bind(E.PAUSE, () => {
+          setPaused((prev) => { const next = [...prev]; next[idx] = true; return next; });
+        });
         target.bind(E.PLAY_PROGRESS, (e: any) => {
           const pos = e?.currentPosition ?? 0;
           setPositions((prev) => {
@@ -200,12 +230,27 @@ export default function TrackGrid() {
           });
         });
         target.bind(E.FINISH, () => {
-          setPlayingIndex((pi) => (pi === idx ? null : pi));
-          setPositions((prev) => {
-            const next = [...prev];
-            next[idx] = 0;
-            return next;
-          });
+          setPositions((prev) => { const next = [...prev]; next[idx] = 0; return next; });
+          setPaused((prev) => { const next = [...prev]; next[idx] = true; return next; });
+          const nextIdx = idx + 1;
+          if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
+            let nextW = widgetRefs.current[nextIdx];
+            if (!nextW && iframeRefs.current[nextIdx]) {
+              try {
+                nextW = (window as any).SC?.Widget(iframeRefs.current[nextIdx]!);
+                if (nextW) widgetRefs.current[nextIdx] = nextW;
+              } catch {}
+            }
+            if (nextW) {
+              try { nextW.play(); } catch {}
+              setPlayingIndex(nextIdx);
+              setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
+            } else {
+              setPlayingIndex(null);
+            }
+          } else {
+            setPlayingIndex(null);
+          }
         });
         boundSet.current.add(idx);
       } catch {}
@@ -263,7 +308,11 @@ export default function TrackGrid() {
                     {t.embedSrc && (
                       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
                         <div className="rounded-full bg-background/60 ring-1 ring-foreground/20 p-3 backdrop-blur-sm">
-                          <Play className="h-6 w-6 text-foreground" aria-hidden="true" />
+                          {playingIndex === idx && !paused[idx] ? (
+                            <Pause className="h-6 w-6 text-foreground" aria-hidden="true" />
+                          ) : (
+                            <Play className="h-6 w-6 text-foreground" aria-hidden="true" />
+                          )}
                         </div>
                         <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
                       </div>
