@@ -172,9 +172,17 @@ export default function TrackGrid() {
               } catch {}
             }
             if (nextW) {
-              try { nextW.play(); } catch {}
-              setPlayingIndex(nextIdx);
-              setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
+              // Fallback per mobile: uso handleCoverClick invece di nextW.play() diretto
+              setTimeout(() => {
+                try { 
+                  nextW.play(); 
+                  setPlayingIndex(nextIdx);
+                  setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
+                } catch {
+                  // Se il play diretto fallisce, uso handleCoverClick
+                  handleCoverClick(nextIdx);
+                }
+              }, 100);
             } else {
               setPlayingIndex(null);
             }
