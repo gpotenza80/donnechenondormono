@@ -203,13 +203,25 @@ export default function TrackGrid() {
             setPlayingIndex(nextIdx);
             scrollToCard(nextIdx);
             
-            // Usa handleCoverClick per tentare l'auto-play
+            // Pausa tutti gli altri widget prima
+            widgetRefs.current.forEach((w, index) => {
+              if (w && index !== nextIdx) {
+                try { w.pause(); } catch {}
+              }
+            });
+            
+            // Riproduci la traccia successiva direttamente
             setTimeout(() => {
-              try {
-                handleCoverClick(nextIdx);
-                console.log('[TrackGrid] handleCoverClick called for next track:', nextIdx);
-              } catch (error) {
-                console.log('[TrackGrid] Auto-play failed:', error);
+              const nextWidget = widgetRefs.current[nextIdx];
+              if (nextWidget) {
+                try {
+                  nextWidget.play();
+                  console.log('[TrackGrid] Direct widget play called for track:', nextIdx);
+                } catch (error) {
+                  console.log('[TrackGrid] Direct widget play failed:', error);
+                }
+              } else {
+                console.log('[TrackGrid] Next widget not found for index:', nextIdx);
               }
             }, 300);
           } else {
