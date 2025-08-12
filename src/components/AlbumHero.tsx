@@ -58,21 +58,21 @@ export default function AlbumHero() {
             Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="hero" size="lg">
+            <Button asChild variant="hero" size="lg" className="min-w-[180px] md:min-w-[200px]">
               <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="min-w-[180px] md:min-w-[200px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
             </Button>
           </div>
           </div>
 
-        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border" style={{ boxShadow: "var(--shadow-soft)" }}>
+        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border bg-card" style={{ boxShadow: "var(--shadow-soft)" }}>
           <img
             src={heroImage}
             alt="Copertina concettuale notturna, tonalità viola e ciano per l’album Donne che non dormono"
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-contain"
           />
           <div
             className="absolute inset-0"
