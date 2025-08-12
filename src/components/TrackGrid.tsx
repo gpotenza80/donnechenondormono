@@ -179,6 +179,7 @@ export default function TrackGrid() {
   }, [scReady]);
 
   const handleCoverClick = (idx: number) => {
+    try { console.log('[TrackGrid] handleCoverClick', idx, 'scReady', scReady); } catch {}
     const track = tracks[idx];
     if (!track.embedSrc) return;
     if (!scReady) { pendingPlayIndex.current = idx; return; }
@@ -271,13 +272,21 @@ export default function TrackGrid() {
   };
 
   useEffect(() => {
-    const handler = () => handleCoverClick(0);
+    const handler = () => {
+      try { console.log('[TrackGrid] event: play-first-track'); } catch {}
+      handleCoverClick(0);
+      setTimeout(() => handleCoverClick(0), 120);
+    };
     window.addEventListener("play-first-track", handler as any);
     return () => window.removeEventListener("play-first-track", handler as any);
   }, []);
 
   useEffect(() => {
-    (window as any).playFirstAlbumTrack = () => handleCoverClick(0);
+    (window as any).playFirstAlbumTrack = () => {
+      try { console.log('[TrackGrid] window.playFirstAlbumTrack called'); } catch {}
+      handleCoverClick(0);
+      setTimeout(() => handleCoverClick(0), 120);
+    };
     return () => { try { delete (window as any).playFirstAlbumTrack; } catch {} };
   }, []);
 

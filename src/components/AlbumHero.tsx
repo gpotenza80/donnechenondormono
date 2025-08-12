@@ -20,8 +20,11 @@ export default function AlbumHero() {
 
   const playFirst = useCallback((e?: React.MouseEvent) => {
     e?.preventDefault?.();
-    (window as any).playFirstAlbumTrack?.();
-    window.dispatchEvent(new CustomEvent("play-first-track"));
+    console.log("[AlbumHero] CTA clicked: play-first-track");
+    try { (window as any).playFirstAlbumTrack?.(); } catch {}
+    try { requestAnimationFrame(() => (window as any).playFirstAlbumTrack?.()); } catch {}
+    try { setTimeout(() => (window as any).playFirstAlbumTrack?.(), 150); } catch {}
+    try { window.dispatchEvent(new CustomEvent("play-first-track")); } catch {}
     document.getElementById("ascolta")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
