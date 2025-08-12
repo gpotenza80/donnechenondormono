@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
+import { Play } from "lucide-react";
 
 const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secret_token=s-PWvlpNWPDGi";
 
@@ -155,6 +156,14 @@ export default function TrackGrid() {
                       loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                     />
+                    {t.embedSrc && (
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
+                        <div className="rounded-full bg-foreground/60 backdrop-blur-sm p-3 ring-1 ring-primary/20 shadow">
+                          <Play className="h-6 w-6 text-background" aria-hidden="true" />
+                          <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardHeader>
                 <CardContent className="pt-4">
