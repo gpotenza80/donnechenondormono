@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useRef, useState } from "react";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 const tracks = [
   {
@@ -217,6 +217,20 @@ export default function TrackGrid() {
     }
   };
 
+  const goToPreviousTrack = () => {
+    if (!playlistWidgetRef.current || playingIndex === null) return;
+    
+    const prevIndex = playingIndex > 0 ? playingIndex - 1 : tracks.length - 1;
+    handleCoverClick(prevIndex);
+  };
+
+  const goToNextTrack = () => {
+    if (!playlistWidgetRef.current || playingIndex === null) return;
+    
+    const nextIndex = playingIndex < tracks.length - 1 ? playingIndex + 1 : 0;
+    handleCoverClick(nextIndex);
+  };
+
   // Event listeners per controlli esterni
   useEffect(() => {
     const handler = () => {
@@ -284,6 +298,13 @@ export default function TrackGrid() {
             <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-4 p-4 rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg">
               <div className="flex items-center gap-3 mb-2">
                 <button
+                  onClick={goToPreviousTrack}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                  aria-label="Traccia precedente"
+                >
+                  <SkipBack className="h-4 w-4 text-primary" />
+                </button>
+                <button
                   onClick={togglePlayPause}
                   className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
                   aria-label={isPlaying ? "Pausa" : "Riproduci"}
@@ -293,6 +314,13 @@ export default function TrackGrid() {
                   ) : (
                     <Play className="h-4 w-4 text-primary" />
                   )}
+                </button>
+                <button
+                  onClick={goToNextTrack}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                  aria-label="Traccia successiva"
+                >
+                  <SkipForward className="h-4 w-4 text-primary" />
                 </button>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
