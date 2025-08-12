@@ -200,30 +200,26 @@ export default function TrackGrid() {
           const nextIdx = i + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
             console.log('[TrackGrid] Auto-playing next track:', nextIdx);
+            
+            // Prima imposta lo stato
             setPlayingIndex(nextIdx);
             scrollToCard(nextIdx);
             
-            // Pausa tutti gli altri widget prima
-            widgetRefs.current.forEach((w, index) => {
-              if (w && index !== nextIdx) {
-                try { w.pause(); } catch {}
-              }
-            });
-            
-            // Riproduci la traccia successiva direttamente
+            // Poi riproduci dopo un breve delay per evitare conflitti
             setTimeout(() => {
               const nextWidget = widgetRefs.current[nextIdx];
               if (nextWidget) {
                 try {
+                  console.log('[TrackGrid] About to play next widget:', nextIdx);
                   nextWidget.play();
-                  console.log('[TrackGrid] Direct widget play called for track:', nextIdx);
+                  console.log('[TrackGrid] Widget play() called successfully for track:', nextIdx);
                 } catch (error) {
-                  console.log('[TrackGrid] Direct widget play failed:', error);
+                  console.log('[TrackGrid] Widget play failed:', error);
                 }
               } else {
                 console.log('[TrackGrid] Next widget not found for index:', nextIdx);
               }
-            }, 300);
+            }, 500);
           } else {
             console.log('[TrackGrid] Playlist finished');
             setPlayingIndex(null);
