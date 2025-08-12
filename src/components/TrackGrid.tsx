@@ -247,13 +247,13 @@ export default function TrackGrid() {
           />
 
           {/* Barra di avanzamento */}
-          {isPlaying && playingIndex !== null && (
-            <div className="mb-6 p-4 rounded-lg bg-muted/50 border">
+          {isPlaying && playingIndex !== null && duration > 0 && (
+            <div className="sticky top-4 z-10 mb-6 p-4 rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">
+                <span className="text-sm font-medium truncate mr-4">
                   {tracks[playingIndex]?.title}
                 </span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground whitespace-nowrap">
                   {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
                 </span>
               </div>
@@ -263,8 +263,8 @@ export default function TrackGrid() {
 
           {/* Griglia tracce */}
           <div>
-            <h3 className="text-xl font-semibold mb-4">Tracce</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <h3 className="text-xl font-semibold mb-6">Tracce</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {tracks.map((t, idx) => (
                 <Card 
                   key={t.title} 
