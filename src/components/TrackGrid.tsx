@@ -255,20 +255,21 @@ export default function TrackGrid() {
           </div>
         </div>
 
-        {/* Widget SoundCloud nascosto per gestire l'intera playlist */}
-        <iframe
-          ref={playlistIframeRef}
-          title="Donne che non dormono — Playlist completa"
-          width="100%"
-          height="166"
-          scrolling="no"
-          frameBorder="no"
-          allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2050729731%3Fsecret_token%3Ds-PWvlpNWPDGi&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
-          className="sr-only"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        {/* Player SoundCloud della playlist */}
+        <div className="mt-8">
+          <h3 className="text-xl font-semibold mb-4">Player</h3>
+          <iframe
+            ref={playlistIframeRef}
+            title="Donne che non dormono — Playlist completa"
+            width="100%"
+            height="166"
+            scrolling="no"
+            frameBorder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2050729731%3Fsecret_token%3Ds-PWvlpNWPDGi&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+            className="rounded-lg"
+          />
+        </div>
       </section>
     </>
   );
