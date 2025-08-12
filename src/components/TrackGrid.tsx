@@ -171,6 +171,12 @@ export default function TrackGrid() {
       return;
     }
 
+    // Se è la traccia corrente e sta suonando, metti in pausa
+    if (playingIndex === idx && isPlaying) {
+      playlistWidgetRef.current.pause();
+      return;
+    }
+
     // Salta alla traccia specifica e riproduci
     try {
       playlistWidgetRef.current.skip(idx);
@@ -181,6 +187,16 @@ export default function TrackGrid() {
       scrollToCard(idx);
     } catch (error) {
       console.error('[TrackGrid] Error playing track:', error);
+    }
+  };
+
+  const togglePlayPause = () => {
+    if (!playlistWidgetRef.current) return;
+    
+    if (isPlaying) {
+      playlistWidgetRef.current.pause();
+    } else {
+      playlistWidgetRef.current.play();
     }
   };
 
@@ -248,16 +264,31 @@ export default function TrackGrid() {
 
           {/* Barra di avanzamento */}
           {isPlaying && playingIndex !== null && duration > 0 && (
-            <div className="sticky top-4 z-10 mb-6 p-4 rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium truncate mr-4">
-                  {tracks[playingIndex]?.title}
-                </span>
-                <span className="text-xs text-muted-foreground whitespace-nowrap">
-                  {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
-                </span>
+            <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-4 p-4 rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <button
+                  onClick={togglePlayPause}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                  aria-label={isPlaying ? "Pausa" : "Riproduci"}
+                >
+                  {isPlaying ? (
+                    <Pause className="h-4 w-4 text-primary" />
+                  ) : (
+                    <Play className="h-4 w-4 text-primary" />
+                  )}
+                </button>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium truncate">
+                      {tracks[playingIndex]?.title}
+                    </span>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap ml-2">
+                      {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <Progress value={position * 100} className="h-1" />
+                </div>
               </div>
-              <Progress value={position * 100} className="h-2" />
             </div>
           )}
 
