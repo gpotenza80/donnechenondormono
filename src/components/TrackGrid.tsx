@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 
@@ -69,6 +70,8 @@ export default function TrackGrid() {
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackInfo, setCurrentTrackInfo] = useState<any>(null);
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     if ((window as any).SC?.Widget) {
@@ -127,8 +130,10 @@ export default function TrackGrid() {
         setIsPlaying(false);
       });
 
-      // Traccia il cambio di brano
-      widget.bind(E.PLAY_PROGRESS, () => {
+      // Traccia il cambio di brano e la posizione
+      widget.bind(E.PLAY_PROGRESS, (data: any) => {
+        setPosition(data.relativePosition || 0);
+        
         widget.getCurrentSoundIndex((index: number) => {
           if (index !== playingIndex) {
             console.log('[TrackGrid] Track changed to:', index);
@@ -137,6 +142,11 @@ export default function TrackGrid() {
               scrollToCard(index);
             }
           }
+        });
+        
+        // Ottieni durata del brano corrente
+        widget.getDuration((duration: number) => {
+          setDuration(duration);
         });
       });
 
@@ -235,6 +245,21 @@ export default function TrackGrid() {
             aria-hidden="true"
             tabIndex={-1}
           />
+
+          {/* Barra di avanzamento */}
+          {isPlaying && playingIndex !== null && (
+            <div className="mb-6 p-4 rounded-lg bg-muted/50 border">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">
+                  {tracks[playingIndex]?.title}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
+                </span>
+              </div>
+              <Progress value={position * 100} className="h-2" />
+            </div>
+          )}
 
           {/* Griglia tracce */}
           <div>
