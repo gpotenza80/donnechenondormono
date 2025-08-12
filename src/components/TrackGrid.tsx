@@ -276,6 +276,11 @@ export default function TrackGrid() {
     return () => window.removeEventListener("play-first-track", handler as any);
   }, []);
 
+  useEffect(() => {
+    (window as any).playFirstAlbumTrack = () => handleCoverClick(0);
+    return () => { try { delete (window as any).playFirstAlbumTrack; } catch {} };
+  }, []);
+
   const formatMs = (ms: number) => {
     const total = Math.max(0, Math.floor((ms || 0) / 1000));
     const m = Math.floor(total / 60);

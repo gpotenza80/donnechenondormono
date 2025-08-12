@@ -18,8 +18,11 @@ export default function AlbumHero() {
     setSpot({ x, y });
   }, []);
 
-  const playFirst = useCallback(() => {
+  const playFirst = useCallback((e?: React.MouseEvent) => {
+    e?.preventDefault?.();
+    (window as any).playFirstAlbumTrack?.();
     window.dispatchEvent(new CustomEvent("play-first-track"));
+    document.getElementById("ascolta")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
