@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 import { useEffect, useRef, useState } from "react";
-import { Play, Pause, SkipBack, SkipForward, RotateCcw, RotateCw } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 const tracks = [
   {
@@ -231,31 +231,17 @@ export default function TrackGrid() {
     handleCoverClick(nextIndex);
   };
 
-  const rewind10Seconds = () => {
+  const handleSliderChange = (values: number[]) => {
     if (!playlistWidgetRef.current || !duration) return;
     
-    const currentTimeMs = position * duration;
-    const newTimeMs = Math.max(0, currentTimeMs - 10000); // 10 secondi in millisecondi
+    const percentage = values[0] / 100;
+    const seekPosition = percentage * duration;
     
     try {
-      playlistWidgetRef.current.seekTo(newTimeMs);
-      setPosition(newTimeMs / duration);
+      playlistWidgetRef.current.seekTo(seekPosition);
+      setPosition(percentage);
     } catch (error) {
-      console.error('[TrackGrid] Error rewinding:', error);
-    }
-  };
-
-  const forward10Seconds = () => {
-    if (!playlistWidgetRef.current || !duration) return;
-    
-    const currentTimeMs = position * duration;
-    const newTimeMs = Math.min(duration, currentTimeMs + 10000); // 10 secondi in millisecondi
-    
-    try {
-      playlistWidgetRef.current.seekTo(newTimeMs);
-      setPosition(newTimeMs / duration);
-    } catch (error) {
-      console.error('[TrackGrid] Error forwarding:', error);
+      console.error('[TrackGrid] Error seeking:', error);
     }
   };
 
@@ -333,13 +319,6 @@ export default function TrackGrid() {
                   <SkipBack className="h-4 w-4 text-primary" />
                 </button>
                 <button
-                  onClick={rewind10Seconds}
-                  className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
-                  aria-label="Riavvolgi 10 secondi"
-                >
-                  <RotateCcw className="h-3 w-3 text-primary" />
-                </button>
-                <button
                   onClick={togglePlayPause}
                   className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
                   aria-label={isPlaying ? "Pausa" : "Riproduci"}
@@ -349,13 +328,6 @@ export default function TrackGrid() {
                   ) : (
                     <Play className="h-4 w-4 text-primary" />
                   )}
-                </button>
-                <button
-                  onClick={forward10Seconds}
-                  className="flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
-                  aria-label="Avanza 10 secondi"
-                >
-                  <RotateCw className="h-3 w-3 text-primary" />
                 </button>
                 <button
                   onClick={goToNextTrack}
@@ -373,12 +345,13 @@ export default function TrackGrid() {
                       {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
                     </span>
                   </div>
-                  <div 
-                    onClick={handleProgressClick}
-                    className="cursor-pointer"
-                  >
-                    <Progress value={position * 100} className="h-1" />
-                  </div>
+                  <Slider
+                    value={[position * 100]}
+                    onValueChange={handleSliderChange}
+                    max={100}
+                    step={0.1}
+                    className="w-full"
+                  />
                 </div>
               </div>
             </div>
