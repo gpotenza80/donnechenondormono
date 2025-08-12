@@ -87,6 +87,7 @@ export default function TrackGrid() {
   const [scReady, setScReady] = useState(false);
   const iframeRefs = useRef<(HTMLIFrameElement | null)[]>([]);
   const widgetRefs = useRef<any[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const boundSet = useRef<Set<number>>(new Set());
   const [durations, setDurations] = useState<number[]>(Array(tracks.length).fill(0));
@@ -208,6 +209,14 @@ export default function TrackGrid() {
     } catch {}
   };
 
+  const scrollToCard = (idx: number) => {
+    const el = cardRefs.current[idx];
+    if (!el) return;
+    try {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch {}
+  };
+
   const handleCoverClick = (idx: number) => {
     try { console.log('[TrackGrid] handleCoverClick', idx, 'scReady', scReady); } catch {}
     const track = tracks[idx];
@@ -326,7 +335,9 @@ export default function TrackGrid() {
       const idx = Math.max(0, Math.min(tracks.length - 1, e?.detail?.index ?? 0));
       try { console.log('[TrackGrid] event: play-track-index', idx); } catch {}
       handleCoverClick(idx);
+      scrollToCard(idx);
       setTimeout(() => handleCoverClick(idx), 120);
+      setTimeout(() => scrollToCard(idx), 130);
     };
     window.addEventListener("play-track-index", handler as any);
     return () => window.removeEventListener("play-track-index", handler as any);
@@ -359,7 +370,7 @@ export default function TrackGrid() {
           <h3 className="text-xl font-semibold mb-4">Tracce</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {tracks.map((t, idx) => (
-              <Card key={t.title}>
+              <Card key={t.title} ref={(el) => (cardRefs.current[idx] = el)} tabIndex={-1}>
                 <CardHeader className="p-0">
                   <div
                     className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
