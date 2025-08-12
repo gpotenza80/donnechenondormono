@@ -329,7 +329,9 @@ export default function TrackGrid() {
   };
 
   return (
-    <section id="ascolta" className="container mx-auto py-16 md:py-24">
+    <>
+      <span id="brani" className="block h-0" aria-hidden="true" />
+      <section id="ascolta" className="container mx-auto py-16 md:py-24">
       <div className="grid gap-10">
 
         <div>
@@ -440,5 +442,6 @@ export default function TrackGrid() {
         </div>
       </div>
     </section>
+    </>
   );
 }

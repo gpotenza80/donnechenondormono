@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 217.2 32.6% 17.5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -40,6 +40,12 @@ All colors MUST be HSL.
     --brand: 265 85% 60%;
     --brand-2: 195 85% 55%;
     --gradient-primary: linear-gradient(135deg, hsl(var(--brand)), hsl(var(--brand-2)));
+
+    /* Extra surfaces and shadows */
+    --surface-subtle: 210 40% 98%; /* #F8FAFC */
+    --shadow-soft: 0 20px 40px rgba(0,0,0,0.10);
+    --chip-border: 214.3 31.8% 91.4%; /* #E5E7EB */
+    --chip-border-hover: 213 19% 82%; /* #CBD5E1 */
 
     /* Shadows */
     --shadow-elegant: 0 12px 30px -12px hsl(var(--brand) / 0.35);
@@ -115,9 +121,20 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    line-height: 1.55;
   }
 
   h1, h2, h3 {
     font-family: var(--font-display);
+  }
+
+  /* Chips style */
+  .chip {
+    @apply inline-flex items-center rounded-full border bg-card/60 backdrop-blur text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background;
+    padding: 0.375rem 0.75rem; /* 6px 12px */
+    border-color: hsl(var(--chip-border));
+  }
+  .chip:hover {
+    border-color: hsl(var(--chip-border-hover));
   }
 }

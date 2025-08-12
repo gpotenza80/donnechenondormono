@@ -25,7 +25,8 @@ export default function AlbumHero() {
     try { requestAnimationFrame(() => (window as any).playFirstAlbumTrack?.()); } catch {}
     try { setTimeout(() => (window as any).playFirstAlbumTrack?.(), 150); } catch {}
     try { window.dispatchEvent(new CustomEvent("play-first-track")); } catch {}
-    document.getElementById("ascolta")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = document.getElementById("brani") || document.getElementById("ascolta");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
@@ -47,29 +48,26 @@ export default function AlbumHero() {
 
       <div
         onMouseMove={onMove}
-        className="relative container mx-auto grid gap-8 md:gap-12 lg:grid-cols-2 items-center py-12 md:py-20"
+        className="relative container mx-auto grid gap-8 md:gap-12 lg:grid-cols-2 items-center pt-12 md:pt-20 pb-8 md:pb-12 lg:pb-14"
       >
-        <div className="relative z-10 space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+        <div className="relative z-10">
+          <h1 className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
             Donne che non dormono
           </h1>
-          <p className="text-muted-foreground max-w-xl text-lg md:text-xl">
+          <p className="max-w-xl text-base md:text-lg mb-5">
             Un concept autoriale di JackPot (Giovanni Potenza). Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#ascolta" onClick={playFirst}>
+            <a href="#brani" onClick={playFirst}>
               <Button variant="hero" size="lg">Ascolta l’album</Button>
             </a>
             <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="lg">Apri su SoundCloud</Button>
             </a>
           </div>
-          <p className="text-sm text-muted-foreground/80 max-w-xl">
-            Una notte generazionale. Un ciclo emotivo. Un racconto in sette stanze.
-          </p>
         </div>
 
-        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-xl overflow-hidden border">
+        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border" style={{ boxShadow: "var(--shadow-soft)" }}>
           <img
             src={heroImage}
             alt="Copertina concettuale notturna, tonalità viola e ciano per l’album Donne che non dormono"
