@@ -48,7 +48,7 @@ export default function AlbumHero() {
 
       <div
         onMouseMove={onMove}
-        className="relative container mx-auto grid gap-8 md:gap-12 lg:grid-cols-2 items-center pt-12 md:pt-20 pb-8 md:pb-12 lg:pb-14"
+        className="relative container mx-auto grid gap-8 md:gap-12 lg:grid-cols-2 items-center pt-12 md:pt-20 pb-7 md:pb-10 lg:pb-12"
       >
         <div className="relative z-10">
           <h1 className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
