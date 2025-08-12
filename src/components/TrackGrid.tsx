@@ -126,32 +126,55 @@ export default function TrackGrid() {
 
   useEffect(() => {
     if (!scReady) return;
-    widgetRefs.current = iframeRefs.current.map((iframe) =>
-      iframe ? (window as any).SC?.Widget(iframe) : null
-    );
+    
     const E = (window as any).SC?.Widget?.Events;
-    widgetRefs.current.forEach((w, i) => {
-      if (!w || !E || boundSet.current.has(i)) return;
+    if (!E) return;
+
+    // Inizializza i widget e binding una sola volta
+    tracks.forEach((track, i) => {
+      if (!track.embedSrc || boundSet.current.has(i)) return;
+      
+      const iframe = iframeRefs.current[i];
+      if (!iframe) return;
+
       try {
-        w.bind(E.READY, () => {
-          try {
-            w.getDuration((ms: number) => {
-              setDurations((prev) => {
-                const next = [...prev];
-                next[i] = ms || 0;
-                return next;
-              });
+        const widget = (window as any).SC?.Widget(iframe);
+        if (!widget) return;
+        
+        widgetRefs.current[i] = widget;
+
+        // Bind eventi una sola volta per widget
+        widget.bind(E.READY, () => {
+          console.log('[TrackGrid] Widget ready:', i);
+          widget.getDuration((ms: number) => {
+            setDurations((prev) => {
+              const next = [...prev];
+              next[i] = ms || 0;
+              return next;
             });
-          } catch {}
+          });
         });
-        w.bind(E.PLAY, () => {
+
+        widget.bind(E.PLAY, () => {
+          console.log('[TrackGrid] Play event:', i);
           setPlayingIndex(i);
-          setPaused((prev) => { const next = [...prev]; next[i] = false; return next; });
+          setPaused((prev) => { 
+            const next = [...prev]; 
+            next[i] = false; 
+            return next; 
+          });
         });
-        w.bind(E.PAUSE, () => {
-          setPaused((prev) => { const next = [...prev]; next[i] = true; return next; });
+
+        widget.bind(E.PAUSE, () => {
+          console.log('[TrackGrid] Pause event:', i);
+          setPaused((prev) => { 
+            const next = [...prev]; 
+            next[i] = true; 
+            return next; 
+          });
         });
-        w.bind(E.PLAY_PROGRESS, (e: any) => {
+
+        widget.bind(E.PLAY_PROGRESS, (e: any) => {
           const pos = e?.currentPosition ?? 0;
           setPositions((prev) => {
             const next = [...prev];
@@ -159,25 +182,38 @@ export default function TrackGrid() {
             return next;
           });
         });
-        w.bind(E.FINISH, () => {
-          console.log('[TrackGrid] Track finished:', i, 'Moving to next track');
-          setPositions((prev) => { const next = [...prev]; next[i] = 0; return next; });
-          setPaused((prev) => { const next = [...prev]; next[i] = true; return next; });
+
+        widget.bind(E.FINISH, () => {
+          console.log('[TrackGrid] Track finished:', i);
+          setPositions((prev) => { 
+            const next = [...prev]; 
+            next[i] = 0; 
+            return next; 
+          });
+          setPaused((prev) => { 
+            const next = [...prev]; 
+            next[i] = true; 
+            return next; 
+          });
+          
+          // Auto-play next track
           const nextIdx = i + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            console.log('[TrackGrid] Attempting to play next track:', nextIdx);
-            // Su mobile l'autoplay spesso fallisce, quindi simuliamo un click utente
+            console.log('[TrackGrid] Auto-playing next track:', nextIdx);
             setTimeout(() => {
               handleCoverClick(nextIdx);
               scrollToCard(nextIdx);
-            }, 200);
+            }, 300);
           } else {
-            console.log('[TrackGrid] No more tracks, stopping playback');
+            console.log('[TrackGrid] Playlist finished');
             setPlayingIndex(null);
           }
         });
+
         boundSet.current.add(i);
-      } catch {}
+      } catch (error) {
+        console.error('[TrackGrid] Error setting up widget:', i, error);
+      }
     });
   }, [scReady]);
 
@@ -233,55 +269,10 @@ export default function TrackGrid() {
     }
     if (!target) return;
 
-    // Ensure events are bound for progress/duration tracking
-    const E = (window as any).SC?.Widget?.Events;
-    if (target && E && !boundSet.current.has(idx)) {
-      try {
-        target.bind(E.READY, () => {
-          try {
-            target.getDuration((ms: number) => {
-              setDurations((prev) => {
-                const next = [...prev];
-                next[idx] = ms || 0;
-                return next;
-              });
-            });
-          } catch {}
-          try { target.play(); } catch {}
-        });
-        target.bind(E.PLAY, () => {
-          setPlayingIndex(idx);
-          setPaused((prev) => { const next = [...prev]; next[idx] = false; return next; });
-        });
-        target.bind(E.PAUSE, () => {
-          setPaused((prev) => { const next = [...prev]; next[idx] = true; return next; });
-        });
-        target.bind(E.PLAY_PROGRESS, (e: any) => {
-          const pos = e?.currentPosition ?? 0;
-          setPositions((prev) => {
-            const next = [...prev];
-            next[idx] = pos;
-            return next;
-          });
-        });
-        target.bind(E.FINISH, () => {
-          console.log('[TrackGrid] Track finished (handleCoverClick):', idx);
-          setPositions((prev) => { const next = [...prev]; next[idx] = 0; return next; });
-          setPaused((prev) => { const next = [...prev]; next[idx] = true; return next; });
-          const nextIdx = idx + 1;
-          if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            console.log('[TrackGrid] Auto-playing next track:', nextIdx);
-            setTimeout(() => {
-              handleCoverClick(nextIdx);
-              scrollToCard(nextIdx);
-            }, 200);
-          } else {
-            console.log('[TrackGrid] Playlist finished');
-            setPlayingIndex(null);
-          }
-        });
-        boundSet.current.add(idx);
-      } catch {}
+    // Il widget dovrebbe già avere tutti gli eventi configurati
+    if (!target) {
+      console.error('[TrackGrid] No widget found for track:', idx);
+      return;
     }
 
     if (playingIndex === idx) {
