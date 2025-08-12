@@ -73,7 +73,7 @@ export default function AlbumHero() {
                 "radial-gradient(600px circle at var(--spot-x,50%) var(--spot-y,50%), hsl(var(--brand) / 0.25), transparent 55%)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-background/10" />
+          
           <div
             className="absolute inset-0"
             style={{
