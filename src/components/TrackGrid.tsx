@@ -203,10 +203,11 @@ export default function TrackGrid() {
             setPlayingIndex(nextIdx);
             scrollToCard(nextIdx);
             
-            // Usa handleCoverClick per tentare l'auto-play su tutti i dispositivi
+            // Usa handleCoverClick per tentare l'auto-play
             setTimeout(() => {
               try {
                 handleCoverClick(nextIdx);
+                console.log('[TrackGrid] handleCoverClick called for next track:', nextIdx);
               } catch (error) {
                 console.log('[TrackGrid] Auto-play failed:', error);
               }
