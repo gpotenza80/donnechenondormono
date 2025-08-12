@@ -160,33 +160,19 @@ export default function TrackGrid() {
           });
         });
         w.bind(E.FINISH, () => {
+          console.log('[TrackGrid] Track finished:', i, 'Moving to next track');
           setPositions((prev) => { const next = [...prev]; next[i] = 0; return next; });
           setPaused((prev) => { const next = [...prev]; next[i] = true; return next; });
           const nextIdx = i + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            let nextW = widgetRefs.current[nextIdx];
-            if (!nextW && iframeRefs.current[nextIdx]) {
-              try {
-                nextW = (window as any).SC?.Widget(iframeRefs.current[nextIdx]!);
-                if (nextW) widgetRefs.current[nextIdx] = nextW;
-              } catch {}
-            }
-            if (nextW) {
-              // Fallback per mobile: uso handleCoverClick invece di nextW.play() diretto
-              setTimeout(() => {
-                try { 
-                  nextW.play(); 
-                  setPlayingIndex(nextIdx);
-                  setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
-                } catch {
-                  // Se il play diretto fallisce, uso handleCoverClick
-                  handleCoverClick(nextIdx);
-                }
-              }, 100);
-            } else {
-              setPlayingIndex(null);
-            }
+            console.log('[TrackGrid] Attempting to play next track:', nextIdx);
+            // Su mobile l'autoplay spesso fallisce, quindi simuliamo un click utente
+            setTimeout(() => {
+              handleCoverClick(nextIdx);
+              scrollToCard(nextIdx);
+            }, 200);
           } else {
+            console.log('[TrackGrid] No more tracks, stopping playback');
             setPlayingIndex(null);
           }
         });
