@@ -107,6 +107,23 @@ export default function TrackGrid() {
   }, []);
 
   useEffect(() => {
+    if (scReady) return;
+    let tries = 0;
+    const int = setInterval(() => {
+      tries++;
+      const has = Boolean((window as any).SC?.Widget);
+      if (has) {
+        try { console.log('[TrackGrid] SC.Widget detected via poll'); } catch {}
+        setScReady(true);
+        clearInterval(int);
+      } else if (tries > 120) {
+        clearInterval(int);
+      }
+    }, 50);
+    return () => clearInterval(int);
+  }, [scReady]);
+
+  useEffect(() => {
     if (!scReady) return;
     widgetRefs.current = iframeRefs.current.map((iframe) =>
       iframe ? (window as any).SC?.Widget(iframe) : null
@@ -214,6 +231,7 @@ export default function TrackGrid() {
               });
             });
           } catch {}
+          try { target.play(); } catch {}
         });
         target.bind(E.PLAY, () => {
           setPlayingIndex(idx);
