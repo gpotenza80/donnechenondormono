@@ -175,19 +175,31 @@ export default function TrackGrid() {
           // Auto-play next track
           const nextIdx = i + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            console.log('[TrackGrid] Auto-playing next track:', nextIdx);
+            console.log('[TrackGrid] Attempting auto-play next track:', nextIdx);
+            
+            // Mostra quale traccia sta per partire
+            setPlayingIndex(nextIdx);
+            scrollToCard(nextIdx);
+            
+            // Prova l'auto-play dopo un delay
             setTimeout(() => {
               const nextWidget = widgetRefs.current[nextIdx];
               if (nextWidget) {
                 try {
+                  console.log('[TrackGrid] Calling play() on next widget:', nextIdx);
                   nextWidget.play();
-                  scrollToCard(nextIdx);
+                  console.log('[TrackGrid] Successfully called play() on widget:', nextIdx);
                 } catch (error) {
-                  console.log('[TrackGrid] Widget play failed:', error);
+                  console.error('[TrackGrid] Failed to auto-play next track:', error);
+                  // Se l'auto-play fallisce, mostra un messaggio visivo
+                  console.log('[TrackGrid] Auto-play blocked - user interaction needed');
                 }
+              } else {
+                console.error('[TrackGrid] Next widget not found for index:', nextIdx);
               }
-            }, 500);
+            }, 800);
           } else {
+            console.log('[TrackGrid] No more tracks to play');
             setPlayingIndex(null);
           }
         });
