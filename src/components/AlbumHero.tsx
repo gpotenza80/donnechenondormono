@@ -58,10 +58,10 @@ export default function AlbumHero() {
             Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="hero" size="lg" className="min-w-[180px] md:min-w-[200px]">
+            <Button asChild variant="hero" size="lg" className="h-12 min-w-[180px] md:min-w-[200px]">
               <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="min-w-[180px] md:min-w-[200px]">
+            <Button asChild variant="outline" size="lg" className="h-12 min-w-[180px] md:min-w-[200px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
             </Button>
           </div>
