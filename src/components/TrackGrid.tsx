@@ -195,11 +195,24 @@ export default function TrackGrid() {
     }
   }, [scReady]);
 
+  const pokePlay = (idx: number) => {
+    const iframe = iframeRefs.current[idx];
+    if (!iframe) return;
+    try {
+      const cw = iframe.contentWindow;
+      if (!cw) return;
+      const msg = JSON.stringify({ method: "play" });
+      cw.postMessage(msg, "*");
+      setTimeout(() => cw.postMessage(msg, "*"), 120);
+      setTimeout(() => cw.postMessage(msg, "*"), 300);
+    } catch {}
+  };
+
   const handleCoverClick = (idx: number) => {
     try { console.log('[TrackGrid] handleCoverClick', idx, 'scReady', scReady); } catch {}
     const track = tracks[idx];
     if (!track.embedSrc) return;
-    if (!scReady) { pendingPlayIndex.current = idx; return; }
+    if (!scReady) { pendingPlayIndex.current = idx; pokePlay(idx); return; }
 
     // Pause all others
     widgetRefs.current.forEach((w, i) => {
@@ -411,7 +424,7 @@ export default function TrackGrid() {
                       scrolling="no"
                       frameBorder="no"
                       allow="autoplay"
-                      
+                      loading="eager"
                       src={t.embedSrc}
                       className="sr-only"
                       aria-hidden="true"
