@@ -118,7 +118,13 @@ export default function TrackGrid() {
       }
     });
 
-    const target = widgetRefs.current[idx];
+    let target = widgetRefs.current[idx];
+    if (!target && iframeRefs.current[idx]) {
+      try {
+        target = (window as any).SC?.Widget(iframeRefs.current[idx]!);
+        if (target) widgetRefs.current[idx] = target;
+      } catch {}
+    }
     if (!target) return;
 
     if (playingIndex === idx) {
@@ -143,10 +149,10 @@ export default function TrackGrid() {
           <h3 className="text-xl font-semibold mb-4">Tracce</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {tracks.map((t, idx) => (
-              <Card key={t.title} className="group">
+              <Card key={t.title}>
                 <CardHeader className="p-0">
                   <div
-                    className="relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
                     role="button"
                     tabIndex={0}
                     aria-label={`Ascolta ${t.title}`}
@@ -166,7 +172,7 @@ export default function TrackGrid() {
                     />
                     {t.embedSrc && (
                       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
-                        <Play className="h-8 w-8 text-foreground drop-shadow" aria-hidden="true" />
+                        <Play className="h-10 w-10 text-foreground drop-shadow" aria-hidden="true" />
                         <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
                       </div>
                     )}
