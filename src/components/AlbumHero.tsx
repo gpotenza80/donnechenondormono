@@ -1,4 +1,4 @@
-import heroImage from "@/assets/hero-donne-che-non-dormono.jpg";
+const heroImage = "/lovable-uploads/a0043cdb-5907-4e05-9bfe-ce6521dfed4d.png";
 import { Button } from "@/components/ui/button";
 import { useCallback, useState } from "react";
 
