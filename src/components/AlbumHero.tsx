@@ -55,17 +55,17 @@ export default function AlbumHero() {
             Donne che non dormono
           </h1>
           <p className="max-w-xl text-base md:text-lg mb-5">
-            Un concept autoriale di JackPot (Giovanni Potenza). Sette donne. Sette canzoni. Sette ore della notte.
+            Sette donne. Sette canzoni. Sette ore della notte.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#brani" onClick={playFirst}>
-              <Button variant="hero" size="lg">Ascolta l’album</Button>
-            </a>
-            <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="lg">Apri su SoundCloud</Button>
-            </a>
+            <Button asChild variant="hero" size="lg">
+              <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
+            </Button>
           </div>
-        </div>
+          </div>
 
         <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border" style={{ boxShadow: "var(--shadow-soft)" }}>
           <img

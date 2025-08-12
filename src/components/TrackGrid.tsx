@@ -373,7 +373,7 @@ export default function TrackGrid() {
               <Card key={t.title} ref={(el) => (cardRefs.current[idx] = el)} tabIndex={-1}>
                 <CardHeader className="p-0">
                   <div
-                    className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary bg-muted"
                     role="button"
                     tabIndex={0}
                     aria-label={`Ascolta ${t.title}`}
@@ -388,7 +388,7 @@ export default function TrackGrid() {
                     <img
                       src={t.cover}
                       alt={`Copertina brano ${t.title} — Donne che non dormono`}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      className="absolute inset-0 h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     {t.embedSrc && (
                       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
