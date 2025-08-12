@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
 
 const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secret_token=s-PWvlpNWPDGi";
 
@@ -87,6 +88,9 @@ export default function TrackGrid() {
   const iframeRefs = useRef<(HTMLIFrameElement | null)[]>([]);
   const widgetRefs = useRef<any[]>([]);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+  const boundSet = useRef<Set<number>>(new Set());
+  const [durations, setDurations] = useState<number[]>(Array(tracks.length).fill(0));
+  const [positions, setPositions] = useState<number[]>(Array(tracks.length).fill(0));
 
   useEffect(() => {
     if ((window as any).SC?.Widget) {
@@ -105,6 +109,40 @@ export default function TrackGrid() {
     widgetRefs.current = iframeRefs.current.map((iframe) =>
       iframe ? (window as any).SC?.Widget(iframe) : null
     );
+    const E = (window as any).SC?.Widget?.Events;
+    widgetRefs.current.forEach((w, i) => {
+      if (!w || !E || boundSet.current.has(i)) return;
+      try {
+        w.bind(E.READY, () => {
+          try {
+            w.getDuration((ms: number) => {
+              setDurations((prev) => {
+                const next = [...prev];
+                next[i] = ms || 0;
+                return next;
+              });
+            });
+          } catch {}
+        });
+        w.bind(E.PLAY_PROGRESS, (e: any) => {
+          const pos = e?.currentPosition ?? 0;
+          setPositions((prev) => {
+            const next = [...prev];
+            next[i] = pos;
+            return next;
+          });
+        });
+        w.bind(E.FINISH, () => {
+          setPlayingIndex((pi) => (pi === i ? null : pi));
+          setPositions((prev) => {
+            const next = [...prev];
+            next[i] = 0;
+            return next;
+          });
+        });
+        boundSet.current.add(i);
+      } catch {}
+    });
   }, [scReady]);
 
   const handleCoverClick = (idx: number) => {
@@ -127,6 +165,41 @@ export default function TrackGrid() {
     }
     if (!target) return;
 
+    // Ensure events are bound for progress/duration tracking
+    const E = (window as any).SC?.Widget?.Events;
+    if (target && E && !boundSet.current.has(idx)) {
+      try {
+        target.bind(E.READY, () => {
+          try {
+            target.getDuration((ms: number) => {
+              setDurations((prev) => {
+                const next = [...prev];
+                next[idx] = ms || 0;
+                return next;
+              });
+            });
+          } catch {}
+        });
+        target.bind(E.PLAY_PROGRESS, (e: any) => {
+          const pos = e?.currentPosition ?? 0;
+          setPositions((prev) => {
+            const next = [...prev];
+            next[idx] = pos;
+            return next;
+          });
+        });
+        target.bind(E.FINISH, () => {
+          setPlayingIndex((pi) => (pi === idx ? null : pi));
+          setPositions((prev) => {
+            const next = [...prev];
+            next[idx] = 0;
+            return next;
+          });
+        });
+        boundSet.current.add(idx);
+      } catch {}
+    }
+
     if (playingIndex === idx) {
       try {
         target.isPaused((paused: boolean) => {
@@ -139,6 +212,13 @@ export default function TrackGrid() {
       try { target.play(); } catch {}
       setPlayingIndex(idx);
     }
+  };
+
+  const formatMs = (ms: number) => {
+    const total = Math.max(0, Math.floor((ms || 0) / 1000));
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return `${m}:${String(s).padStart(2, "0")}`;
   };
 
   return (
@@ -171,8 +251,10 @@ export default function TrackGrid() {
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     {t.embedSrc && (
-                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
-                        <Play className="h-10 w-10 text-foreground drop-shadow" aria-hidden="true" />
+                      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
+                        <div className="rounded-full bg-background/60 ring-1 ring-foreground/20 p-3 backdrop-blur-sm">
+                          <Play className="h-6 w-6 text-foreground" aria-hidden="true" />
+                        </div>
                         <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
                       </div>
                     )}
@@ -191,6 +273,38 @@ export default function TrackGrid() {
                     </button>
                     {" — "}{t.caption}
                   </p>
+                  <div className="mt-3">
+                    <Slider
+                      value={[
+                        durations[idx]
+                          ? Math.min(100, Math.max(0, (positions[idx] / (durations[idx] || 1)) * 100))
+                          : 0,
+                      ]}
+                      max={100}
+                      step={0.1}
+                      aria-label={`Progresso di ${t.title}`}
+                      onValueChange={(vals) => {
+                        const p = vals[0] ?? 0;
+                        setPositions((prev) => {
+                          const next = [...prev];
+                          next[idx] = (durations[idx] || 0) * (p / 100);
+                          return next;
+                        });
+                      }}
+                      onValueCommit={(vals) => {
+                        const p = vals[0] ?? 0;
+                        const w = widgetRefs.current[idx];
+                        const d = durations[idx] || 0;
+                        try {
+                          if (w && d) w.seekTo(Math.round((p / 100) * d));
+                        } catch {}
+                      }}
+                    />
+                    <div className="mt-1 flex justify-between text-xs text-muted-foreground">
+                      <span>{formatMs(positions[idx])}</span>
+                      <span>{formatMs(durations[idx])}</span>
+                    </div>
+                  </div>
                 </CardContent>
                   {t.embedSrc ? (
                     <iframe
