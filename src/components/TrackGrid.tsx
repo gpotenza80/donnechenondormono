@@ -7,68 +7,76 @@ const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secr
 const tracks = [
   {
     title: "DISCONNESSA",
+    time: "22:00",
     cover: "/lovable-uploads/5d957bbd-957a-414e-9bb0-a42e7c733d68.png",
     url: soundcloudAlbumUrl,
     caption:
-      "23:00 - Disconnessa — Manifesto generazionale sull’identità digitale e il bisogno di realtà. Voce femminile intensa, atmosfera tra pop, elettronica e R&B.",
+      "Manifesto generazionale sull’identità digitale e il bisogno di realtà. Voce femminile intensa, atmosfera tra pop, elettronica e R&B.",
     embedSrc:
       "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141000256%3Fsecret_token%3Ds-XlUmQMpn0e5&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "ADDÀ PASSÀ",
+    time: "23:00",
     cover: "/lovable-uploads/4d6c9b26-e1af-4cd8-83d1-67bdbfceffce.png",
     url: soundcloudAlbumUrl,
     caption:
-      "00:00 - Addà passà — Canzone napoletana emotiva, profonda, autentica. Linguaggio teatrale, intensa, con grande apertura melodica.",
+      "Canzone napoletana emotiva, profonda, autentica. Linguaggio teatrale, intensa, con grande apertura melodica.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141001393%3Fsecret_token%3Ds-IfvSOmlv59I&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Bambenella",
+    time: "00:00",
     cover: "/lovable-uploads/809f9868-c327-48a9-97ae-507c4f940dd2.png",
     url: soundcloudAlbumUrl,
     caption:
-      "01:00 - Bambenélla — Brano teatrale, provocatorio e contemporaneo. Racconta una figura femminile tra denuncia sociale, ironia e resistenza urbana. In napoletano.",
+      "Brano teatrale, provocatorio e contemporaneo. Racconta una figura femminile tra denuncia sociale, ironia e resistenza urbana. In napoletano.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141001681%3Fsecret_token%3Ds-oW1LaFMEcs7&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Ja, fa’ pace cu mmè",
+    time: "01:00",
     cover: "/lovable-uploads/30e107ef-4697-4428-a8ce-21bc12f9b9b5.png",
     url: soundcloudAlbumUrl,
     caption:
-      "02:00 - Ja, Fa’ pace cu mmé — Dialogo intimo, tenero e poetico. Una canzone da camera, emotiva, con potenziale vocale per interpreti teatrali o cinematografici.",
+      "Dialogo intimo, tenero e poetico. Una canzone da camera, emotiva, con potenziale vocale per interpreti teatrali o cinematografici.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141002701%3Fsecret_token%3Ds-f15KZWPZ3ip&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
    {
     title: "Le mie catene",
+    time: "02:00",
     cover: "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
     url: soundcloudAlbumUrl,
     caption:
-      "03:00 - Le mie catene — Testo forte e viscerale. Esprime dolore, desiderio di libertà e ribellione esistenziale. Atmosfera poetica e drammatica.",
+      "Testo forte e viscerale. Esprime dolore, desiderio di libertà e ribellione esistenziale. Atmosfera poetica e drammatica.",
     embedSrc:
       "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141003151%3Fsecret_token%3Ds-53BKwkN2xey&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Pena - Español",
+    time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     url: soundcloudAlbumUrl,
     caption:
-      "04:00 - Pena — Brano emotivo, notturno, intenso. Un crescendo di sofferenza e desiderio. Ottimo per interpreti d’impatto.",
+      "Brano emotivo, notturno, intenso. Un crescendo di sofferenza e desiderio. Ottimo per interpreti d’impatto.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141003586%3Fsecret_token%3Ds-hwGWFf4SHAo&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Pena - Italiano",
+    time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     url: soundcloudAlbumUrl,
     caption:
-      "04:00 - Pena — Brano emotivo, notturno, intenso. Un crescendo di sofferenza e desiderio. Ottimo per interpreti d’impatto.",
+      "Brano emotivo, notturno, intenso. Un crescendo di sofferenza e desiderio. Ottimo per interpreti d’impatto.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141003739%3Fsecret_token%3Ds-Lh56An9JhqW&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
   {
     title: "Londra 2000",
+    time: "04:00",
     cover: "/lovable-uploads/a987e938-ebfb-45fc-a615-15783e121b2f.png",
     url: soundcloudAlbumUrl,
     caption:
-      "05:00 - Londra 2000 — Ballata poetica e malinconica. Uno sguardo sullo spirito dei vent’anni, tra ironia e disillusione. Delicata e riflessiva.",
+      "Ballata poetica e malinconica. Uno sguardo sullo spirito dei vent’anni, tra ironia e disillusione. Delicata e riflessiva.",
     embedSrc: "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2141004411%3Fsecret_token%3Ds-1K5ZKSg7pOO&color=%23886050&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
   },
 ] as const;
