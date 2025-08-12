@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 
 const soundcloudAlbumUrl = "https://api.soundcloud.com/playlists/2050729731?secret_token=s-PWvlpNWPDGi";
 
@@ -72,7 +72,58 @@ const tracks = [
 ] as const;
 
 export default function TrackGrid() {
-  
+  // SoundCloud Widget setup
+  const [scReady, setScReady] = useState(false);
+  const iframeRefs = useRef<(HTMLIFrameElement | null)[]>([]);
+  const widgetRefs = useRef<any[]>([]);
+  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if ((window as any).SC?.Widget) {
+      setScReady(true);
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = "https://w.soundcloud.com/player/api.js";
+    s.async = true;
+    s.onload = () => setScReady(true);
+    document.body.appendChild(s);
+  }, []);
+
+  useEffect(() => {
+    if (!scReady) return;
+    widgetRefs.current = iframeRefs.current.map((iframe) =>
+      iframe ? (window as any).SC?.Widget(iframe) : null
+    );
+  }, [scReady]);
+
+  const handleCoverClick = (idx: number) => {
+    const track = tracks[idx];
+    if (!track.embedSrc || !scReady) return;
+
+    // Pause all others
+    widgetRefs.current.forEach((w, i) => {
+      if (w && i !== idx) {
+        try { w.pause(); } catch {}
+      }
+    });
+
+    const target = widgetRefs.current[idx];
+    if (!target) return;
+
+    if (playingIndex === idx) {
+      try {
+        target.isPaused((paused: boolean) => {
+          if (paused) { target.play(); } else { target.pause(); }
+        });
+      } catch {
+        target.play();
+      }
+    } else {
+      try { target.play(); } catch {}
+      setPlayingIndex(idx);
+    }
+  };
 
   return (
     <section id="ascolta" className="container mx-auto py-16 md:py-24">
@@ -84,7 +135,19 @@ export default function TrackGrid() {
             {tracks.map((t, idx) => (
               <Card key={t.title} className="group">
                 <CardHeader className="p-0">
-                  <div className="relative aspect-square overflow-hidden rounded-t-lg">
+                  <div
+                    className="relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Ascolta ${t.title}`}
+                    onClick={() => handleCoverClick(idx)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleCoverClick(idx);
+                      }
+                    }}
+                  >
                     <img
                       src={t.cover}
                       alt={`Copertina brano ${t.title} — Donne che non dormono`}
@@ -97,22 +160,24 @@ export default function TrackGrid() {
                   <CardTitle className="text-base">{String(idx + 1).padStart(2, "0")} — {t.title}</CardTitle>
                   <p className="mt-2 text-sm text-muted-foreground">{t.caption}</p>
                 </CardContent>
-                <CardFooter>
                   {t.embedSrc ? (
                     <iframe
                       title={`Player SoundCloud — ${t.title}`}
                       width="100%"
-                      height="166"
+                      height="80"
                       scrolling="no"
                       frameBorder="no"
                       allow="autoplay"
                       loading="lazy"
                       src={t.embedSrc}
+                      className="sr-only"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      ref={(el) => (iframeRefs.current[idx] = el)}
                     />
                   ) : (
                     <div className="text-xs text-muted-foreground italic">Player in arrivo</div>
                   )}
-                </CardFooter>
               </Card>
             ))}
           </div>
