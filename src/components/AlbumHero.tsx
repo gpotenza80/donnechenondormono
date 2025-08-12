@@ -67,7 +67,7 @@ export default function AlbumHero() {
           </div>
           </div>
 
-        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border bg-card" style={{ boxShadow: "var(--shadow-soft)" }}>
+        <div className="relative h-[280px] md:h-[420px] lg:h-[520px] rounded-[24px] overflow-hidden border bg-muted" style={{ boxShadow: "var(--shadow-soft)" }}>
           <img
             src={heroImage}
             alt="Copertina concettuale notturna, tonalità viola e ciano per l’album Donne che non dormono"
