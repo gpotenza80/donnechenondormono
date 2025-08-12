@@ -199,27 +199,18 @@ export default function TrackGrid() {
           // Auto-play next track
           const nextIdx = i + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            console.log('[TrackGrid] Moving to next track:', nextIdx);
+            console.log('[TrackGrid] Auto-playing next track:', nextIdx);
             setPlayingIndex(nextIdx);
             scrollToCard(nextIdx);
             
-            // Tenta il play su desktop, su mobile evidenzia solo la traccia
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            
-            if (!isMobile) {
-              setTimeout(() => {
-                const nextWidget = widgetRefs.current[nextIdx];
-                if (nextWidget) {
-                  try {
-                    nextWidget.play();
-                  } catch (error) {
-                    console.log('[TrackGrid] Desktop auto-play failed:', error);
-                  }
-                }
-              }, 300);
-            } else {
-              console.log('[TrackGrid] Mobile detected - track highlighted, manual play required');
-            }
+            // Usa handleCoverClick per tentare l'auto-play su tutti i dispositivi
+            setTimeout(() => {
+              try {
+                handleCoverClick(nextIdx);
+              } catch (error) {
+                console.log('[TrackGrid] Auto-play failed:', error);
+              }
+            }, 300);
           } else {
             console.log('[TrackGrid] Playlist finished');
             setPlayingIndex(null);
