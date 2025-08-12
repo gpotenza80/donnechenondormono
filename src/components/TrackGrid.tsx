@@ -370,7 +370,7 @@ export default function TrackGrid() {
           <h3 className="text-xl font-semibold mb-4">Tracce</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {tracks.map((t, idx) => (
-              <Card key={t.title} ref={(el) => (cardRefs.current[idx] = el)} tabIndex={-1}>
+              <Card key={t.title} id={t.time === "03:00" ? (idx === 5 ? "h03" : undefined) : `h${t.time.slice(0,2)}`} ref={(el) => (cardRefs.current[idx] = el)} tabIndex={-1}>
                 <CardHeader className="p-0">
                   <div
                     className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary bg-muted"

@@ -6,7 +6,7 @@ export default function ConceptSection() {
     <section id="concept" className="container mx-auto pt-6 md:pt-8 lg:pt-8 pb-10 md:pb-14 lg:pb-18">
       <div className="max-w-[760px] space-y-6">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Il concept</h2>
-        <blockquote className="border-l-2 border-border pl-4 text-muted-foreground max-w-[720px] leading-[1.55] space-y-3">
+        <blockquote className="border-l-2 border-border pl-4 text-foreground max-w-[720px] leading-[1.55] space-y-3">
           <p className="text-lg md:text-xl">
             “Sette donne. Sette canzoni. Sette ore della notte.” Ogni brano è un frammento di specchio e un’ora della notte; ogni ora è una donna diversa. Un’identità femminile in bilico tra disconnessione, intimità, rabbia e memoria.
           </p>
@@ -18,20 +18,18 @@ export default function ConceptSection() {
         <div className="mt-8">
           <div className="relative">
             <div className="absolute inset-0 rounded-full opacity-20 blur-3xl" style={{ background: "var(--gradient-primary)" }} />
-            <ol className="relative z-10 flex flex-wrap gap-3 md:gap-4 items-center">
+            <ol className="relative z-10 flex flex-wrap gap-2 items-center">
               {hours.map((h, i) => {
                 const idx = hourToIndex[i];
                 return (
                   <li key={h}>
                     <a
-                      href="#brani"
-                      className="chip"
+                      href={`#h${h.replace(':', '').slice(0, 2)}`}
+                      className="chip text-[15px] px-3"
                       aria-label={`Vai al brano delle ${h}`}
-                      onClick={(e) => {
-                        e.preventDefault();
+                      onClick={() => {
                         try { (window as any).playAlbumTrack?.(idx); } catch {}
                         try { window.dispatchEvent(new CustomEvent("play-track-index", { detail: { index: idx } })); } catch {}
-                        document.getElementById("brani")?.scrollIntoView({ behavior: "smooth", block: "start" });
                       }}
                     >
                       {h}

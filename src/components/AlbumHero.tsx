@@ -57,7 +57,7 @@ export default function AlbumHero() {
           <p className="max-w-xl text-base md:text-lg mb-5">
             Sette donne. Sette canzoni. Sette ore della notte.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-4">
             <Button asChild variant="hero" size="lg" className="h-12 min-w-[180px] md:min-w-[200px]">
               <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
             </Button>
