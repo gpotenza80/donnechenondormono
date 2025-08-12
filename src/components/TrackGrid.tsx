@@ -265,25 +265,18 @@ export default function TrackGrid() {
           });
         });
         target.bind(E.FINISH, () => {
+          console.log('[TrackGrid] Track finished (handleCoverClick):', idx);
           setPositions((prev) => { const next = [...prev]; next[idx] = 0; return next; });
           setPaused((prev) => { const next = [...prev]; next[idx] = true; return next; });
           const nextIdx = idx + 1;
           if (nextIdx < tracks.length && tracks[nextIdx].embedSrc) {
-            let nextW = widgetRefs.current[nextIdx];
-            if (!nextW && iframeRefs.current[nextIdx]) {
-              try {
-                nextW = (window as any).SC?.Widget(iframeRefs.current[nextIdx]!);
-                if (nextW) widgetRefs.current[nextIdx] = nextW;
-              } catch {}
-            }
-            if (nextW) {
-              try { nextW.play(); } catch {}
-              setPlayingIndex(nextIdx);
-              setPaused((prev) => { const next = [...prev]; next[nextIdx] = false; return next; });
-            } else {
-              setPlayingIndex(null);
-            }
+            console.log('[TrackGrid] Auto-playing next track:', nextIdx);
+            setTimeout(() => {
+              handleCoverClick(nextIdx);
+              scrollToCard(nextIdx);
+            }, 200);
           } else {
+            console.log('[TrackGrid] Playlist finished');
             setPlayingIndex(null);
           }
         });
