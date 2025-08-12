@@ -158,17 +158,25 @@ export default function TrackGrid() {
                     />
                     {t.embedSrc && (
                       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
-                        <div className="rounded-full bg-foreground/60 backdrop-blur-sm p-3 ring-1 ring-primary/20 shadow">
-                          <Play className="h-6 w-6 text-background" aria-hidden="true" />
-                          <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
-                        </div>
+                        <Play className="h-8 w-8 text-foreground drop-shadow" aria-hidden="true" />
+                        <span className="sr-only">Riproduci o metti in pausa {t.title}</span>
                       </div>
                     )}
                   </div>
                 </CardHeader>
                 <CardContent className="pt-4">
                   <CardTitle className="text-base">{String(idx + 1).padStart(2, "0")} — {t.title}</CardTitle>
-                  <p className="mt-2 text-sm text-muted-foreground">{t.caption}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    <button
+                      type="button"
+                      className="story-link inline-flex items-center font-medium text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+                      aria-label={`Ascolta ${t.title} alle ${t.time}`}
+                      onClick={() => handleCoverClick(idx)}
+                    >
+                      {t.time}
+                    </button>
+                    {" — "}{t.caption}
+                  </p>
                 </CardContent>
                   {t.embedSrc ? (
                     <iframe
