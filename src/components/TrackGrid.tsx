@@ -309,8 +309,8 @@ export default function TrackGrid() {
 
           {/* Barra di avanzamento */}
           {isPlaying && playingIndex !== null && duration > 0 && (
-            <div className="fixed inset-x-0 top-4 z-50 px-4">
-              <div className="mx-auto w-full max-w-xs rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg p-3">
+            <div className="fixed top-[max(env(safe-area-inset-top),1rem)] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)]">
+              <div className="mx-auto w-full max-w-[19rem] rounded-lg bg-background/95 backdrop-blur-sm border shadow-lg p-3">
                 <div className="flex items-center gap-3 mb-2">
                   <button
                     onClick={goToPreviousTrack}
