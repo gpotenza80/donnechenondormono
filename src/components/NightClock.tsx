@@ -63,14 +63,6 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
           ))}
         </div>
         
-        {/* Indicatore corrente */}
-        {currentTrackIndex >= 0 && (
-          <div className="mt-3 pt-2 border-t border-border/50">
-            <div className="text-xs text-center text-muted-foreground">
-              Ora corrente: {timeSlots[currentTrackIndex]?.hour}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

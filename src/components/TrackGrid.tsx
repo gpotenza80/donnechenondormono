@@ -44,14 +44,14 @@ const tracks = [
     time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     caption:
-      "Bolero moderno di attesa e ferita. In spagnolo.",
+      "Tango moderno di attesa e ferita. In spagnolo.",
   },
   {
     title: "Pena - Italiano",
     time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     caption:
-      "Bolero moderno di attesa e ferita. In italiano.",
+      "Tango moderno di attesa e ferita. In italiano.",
   },
   {
     title: "Londra 2000",
