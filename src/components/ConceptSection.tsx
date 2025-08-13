@@ -40,7 +40,7 @@ export default function ConceptSection() {
   }, []);
 
   return (
-    <section id="concept" className="container mx-auto pt-6 md:pt-8 lg:pt-8 pb-10 md:pb-14 lg:pb-18">
+    <section id="concept" className="container mx-auto pt-6 md:pt-8 lg:pt-8 pb-6 md:pb-8 lg:pb-10">
       <div className="flex flex-col lg:flex-row lg:gap-12 lg:items-start">
         <div className="flex-1 max-w-[760px] space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Il concept</h2>

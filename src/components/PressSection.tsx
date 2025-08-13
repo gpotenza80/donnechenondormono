@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="chi-sono" className="container mx-auto py-16 md:py-24">
+    <section id="chi-sono" className="container mx-auto py-10 md:py-14">
       <div className="max-w-3xl space-y-6">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Chi sono</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed">

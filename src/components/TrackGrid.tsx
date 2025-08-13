@@ -293,7 +293,7 @@ export default function TrackGrid() {
   return (
     <>
       <span id="brani" className="block h-0" aria-hidden="true" />
-      <section id="ascolta" className="container mx-auto py-16 md:py-24">
+      <section id="ascolta" className="container mx-auto py-10 md:py-14">
         <div className="grid gap-10">
           
           {/* Player nascosto che gestisce l'audio in background */}
