@@ -54,7 +54,7 @@ export default function ConceptSection() {
           </blockquote>
         </div>
         
-        <div className="lg:flex-shrink-0 lg:w-80 mt-6 lg:mt-0">
+        <div className="lg:flex-shrink-0 lg:w-72 mt-6 lg:mt-0">
           <NightClock currentTrackIndex={currentTrackIndex} onTimeClick={scrollToTracks} />
         </div>
       </div>

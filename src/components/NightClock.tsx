@@ -12,7 +12,7 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
     { hour: "22:00", label: "Disconnessa" },
     { hour: "23:00", label: "Addà passà" },
     { hour: "00:00", label: "Bambenélla" },
-    { hour: "01:00", label: "Ja, fa' pace" },
+    { hour: "01:00", label: "Ja, fa' pace cu mmé" },
     { hour: "02:00", label: "Le mie catene" },
     { hour: "03:00", label: "Pena ES" },
     { hour: "04:00", label: "Londra 2000" }
@@ -23,7 +23,7 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
   }, [currentTrackIndex]);
 
   return (
-    <div className="w-full max-w-xs">
+    <div className="w-full max-w-[280px]">
       <div className="bg-card/40 backdrop-blur-sm border border-border/50 rounded-lg p-4 shadow-sm">
         <div className="text-center mb-3">
           <h3 className="text-sm font-medium text-muted-foreground">Timeline notturna</h3>
@@ -56,7 +56,7 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
               </div>
               
               {/* Titolo brano */}
-              <div className="text-xs truncate max-w-[120px] text-right">
+              <div className="text-xs text-right flex-1 min-w-0">
                 {slot.label}
               </div>
             </button>
