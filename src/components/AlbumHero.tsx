@@ -55,7 +55,7 @@ export default function AlbumHero() {
           <h1 className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
             Donne che non dormono
           </h1>
-          <p className="max-w-xl text-base md:text-lg mb-5 text-center lg:text-left">
+          <p className="max-w-xl text-base md:text-lg mb-5 text-left">
             <span className="block">Sette donne.</span>
             <span className="block">Sette canzoni.</span>
             <span className="block">Sette ore della notte.</span>
