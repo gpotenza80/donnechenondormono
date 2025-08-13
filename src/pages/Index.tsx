@@ -3,19 +3,17 @@ import ConceptSection from "@/components/ConceptSection";
 import TrackGrid from "@/components/TrackGrid";
 import AboutSection from "@/components/PressSection";
 import SiteFooter from "@/components/SiteFooter";
-import NightSky from "@/components/NightSky";
+import NightClock from "@/components/NightClock";
 
 const Index = () => {
   return (
-    <main id="top" className="min-h-screen relative">
-      <NightSky />
-      <div className="relative z-10">
-        <AlbumHero />
-        <ConceptSection />
-        <TrackGrid />
-        <AboutSection />
-        <SiteFooter />
-      </div>
+    <main id="top" className="min-h-screen bg-background">
+      <NightClock />
+      <AlbumHero />
+      <ConceptSection />
+      <TrackGrid />
+      <AboutSection />
+      <SiteFooter />
     </main>
   );
 };
