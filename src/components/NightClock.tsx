@@ -15,7 +15,7 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
     { hour: "01:00", label: "Ja, fa' pace" },
     { hour: "02:00", label: "Le mie catene" },
     { hour: "03:00", label: "Pena ES" },
-    { hour: "04:00", label: "Pena IT" }
+    { hour: "04:00", label: "Londra 2000" }
   ];
 
   useEffect(() => {
