@@ -61,7 +61,7 @@ export default function AlbumHero() {
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-12 w-[200px] md:w-[220px]">
+            <Button asChild variant="secondary" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
             </Button>
           </div>
