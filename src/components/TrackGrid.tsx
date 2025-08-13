@@ -114,6 +114,8 @@ export default function TrackGrid() {
         widget.getCurrentSoundIndex((index: number) => {
           console.log('[TrackGrid] Current track index:', index);
           setPlayingIndex(index);
+          // Invia evento per aggiornare l'orologio
+          window.dispatchEvent(new CustomEvent('track-changed', { detail: { index } }));
           if (index >= 0 && index < tracks.length) {
             scrollToCard(index);
           }
@@ -138,6 +140,8 @@ export default function TrackGrid() {
           if (index !== playingIndex) {
             console.log('[TrackGrid] Track changed to:', index);
             setPlayingIndex(index);
+            // Invia evento per aggiornare l'orologio
+            window.dispatchEvent(new CustomEvent('track-changed', { detail: { index } }));
             if (index >= 0 && index < tracks.length) {
               scrollToCard(index);
             }
