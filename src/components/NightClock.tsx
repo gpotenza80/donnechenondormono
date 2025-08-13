@@ -23,59 +23,54 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
   }, [currentTrackIndex]);
 
   return (
-    <div className="w-full max-w-sm">
-      <div className="bg-card/60 backdrop-blur-sm border border-border rounded-lg p-4 shadow-elegant">
+    <div className="w-full max-w-xs">
+      <div className="bg-card/40 backdrop-blur-sm border border-border/50 rounded-lg p-4 shadow-sm">
         <div className="text-center mb-3">
-          <h3 className="text-sm font-medium text-foreground">Sette ore della notte</h3>
+          <h3 className="text-sm font-medium text-muted-foreground">Timeline notturna</h3>
         </div>
         
-        {/* Timeline compatta */}
-        <div className="space-y-2">
+        {/* Timeline elegante */}
+        <div className="space-y-1.5">
           {timeSlots.map((slot, index) => (
             <button
               key={index} 
               onClick={() => onTimeClick?.(index)}
               className={`
-                w-full flex items-center justify-between p-2 rounded-md transition-all duration-300 hover:bg-card/80 group text-left
-                ${index <= currentTrackIndex ? 'text-accent' : 'text-muted-foreground hover:text-foreground'}
+                w-full flex items-center justify-between px-3 py-2 rounded-md transition-all duration-200 hover:bg-card/60 group text-left
+                ${index <= currentTrackIndex 
+                  ? 'text-accent bg-accent/5' 
+                  : 'text-muted-foreground hover:text-foreground'}
               `}
             >
-              {/* Ora e punto */}
-              <div className="flex items-center gap-3">
+              {/* Ora */}
+              <div className="flex items-center gap-2">
                 <div className={`
-                  text-xs font-mono transition-colors duration-500
-                  ${index <= currentTrackIndex ? 'text-accent' : 'text-muted-foreground group-hover:text-foreground'}
-                `}>
-                  {slot.hour}
-                </div>
-                
-                <div className={`
-                  w-2 h-2 rounded-full border transition-all duration-500
+                  w-1.5 h-1.5 rounded-full transition-all duration-200
                   ${index <= currentTrackIndex 
-                    ? 'bg-accent border-accent shadow-glow' 
-                    : 'bg-background border-border group-hover:border-accent/50'}
-                `}>
-                  {index === currentTrackIndex && (
-                    <div className="absolute inset-0 rounded-full bg-accent animate-pulse"></div>
-                  )}
-                </div>
+                    ? 'bg-accent' 
+                    : 'bg-muted-foreground/30 group-hover:bg-muted-foreground/50'}
+                `} />
+                <span className="text-xs font-mono">
+                  {slot.hour}
+                </span>
               </div>
               
               {/* Titolo brano */}
-              <div className={`
-                text-xs transition-colors duration-500 truncate
-                ${index <= currentTrackIndex ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}
-              `}>
+              <div className="text-xs truncate max-w-[120px] text-right">
                 {slot.label}
               </div>
             </button>
           ))}
         </div>
         
-        {/* Stelle decorative */}
-        <div className="absolute -top-1 -right-1 w-2 h-2 bg-accent rounded-full animate-pulse opacity-60"></div>
-        <div className="absolute top-6 -left-1 w-1 h-1 bg-accent rounded-full animate-pulse opacity-40 animation-delay-1000"></div>
-        <div className="absolute bottom-4 -right-2 w-1.5 h-1.5 bg-accent rounded-full animate-pulse opacity-50 animation-delay-2000"></div>
+        {/* Indicatore corrente */}
+        {currentTrackIndex >= 0 && (
+          <div className="mt-3 pt-2 border-t border-border/50">
+            <div className="text-xs text-center text-muted-foreground">
+              Ora corrente: {timeSlots[currentTrackIndex]?.hour}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
