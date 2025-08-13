@@ -78,8 +78,8 @@ export default function AlbumHero() {
           
           {/* Play overlay */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="bg-primary/90 backdrop-blur-sm rounded-full p-6 transform scale-75 group-hover:scale-100 transition-transform duration-300">
-              <Play className="w-12 h-12 text-primary-foreground fill-current" />
+            <div className="rounded-full bg-background/60 ring-1 ring-foreground/20 p-3 backdrop-blur-sm">
+              <Play className="h-6 w-6 text-foreground fill-current" />
             </div>
           </div>
         </div>
