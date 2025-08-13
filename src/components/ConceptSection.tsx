@@ -23,8 +23,14 @@ export default function ConceptSection() {
   // Ascolta i cambi di traccia
   useEffect(() => {
     const handleTrackChange = (event: CustomEvent) => {
-      const index = event.detail.index;
+      let index = event.detail.index;
       if (typeof index === 'number') {
+        // Mappatura corretta per l'orologio: entrambe le "Pena" (indici 5 e 6) mostrano l'indice 5
+        if (index === 6) { // "Pena - Italiano"
+          index = 5; // Mappa a "Pena ES" nell'orologio
+        } else if (index === 7) { // "Londra 2000"
+          index = 6; // Mappa a "Londra 2000" nell'orologio
+        }
         setCurrentTrackIndex(index);
       }
     };
