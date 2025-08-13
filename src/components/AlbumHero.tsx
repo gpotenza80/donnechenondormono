@@ -55,8 +55,10 @@ export default function AlbumHero() {
           <h1 className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
             Donne che non dormono
           </h1>
-          <p className="max-w-xl text-base md:text-lg mb-5">
-            Sette donne. Sette canzoni. Sette ore della notte.
+          <p className="max-w-xl text-base md:text-lg mb-5 text-center lg:text-left">
+            <span className="block">Sette donne.</span>
+            <span className="block">Sette canzoni.</span>
+            <span className="block">Sette ore della notte.</span>
           </p>
           <div className="flex flex-wrap gap-4">
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
