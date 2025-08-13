@@ -310,39 +310,39 @@ export default function TrackGrid() {
           {/* Barra di avanzamento */}
           {isPlaying && playingIndex !== null && duration > 0 && (
             <div className="fixed top-[max(env(safe-area-inset-top),1rem)] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)]">
-              <div className="mx-auto w-full max-w-[19rem] rounded-lg bg-foreground/95 backdrop-blur-md border border-border shadow-elegant p-3">
+              <div className="mx-auto w-full max-w-[19rem] rounded-lg bg-gradient-to-tr from-[hsl(var(--brand))] to-[hsl(var(--brand-2))] backdrop-blur-md border border-border shadow-elegant p-3">
                 <div className="flex items-center gap-3 mb-2">
                   <button
                     onClick={goToPreviousTrack}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
                     aria-label="Traccia precedente"
                   >
-                    <SkipBack className="h-4 w-4 text-background" />
+                    <SkipBack className="h-4 w-4 text-white" />
                   </button>
                   <button
                     onClick={togglePlayPause}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
                     aria-label={isPlaying ? "Pausa" : "Riproduci"}
                   >
                     {isPlaying ? (
-                      <Pause className="h-4 w-4 text-background" />
+                      <Pause className="h-4 w-4 text-white" />
                     ) : (
-                      <Play className="h-4 w-4 text-background" />
+                      <Play className="h-4 w-4 text-white" />
                     )}
                   </button>
                   <button
                     onClick={goToNextTrack}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 hover:bg-primary/30 transition-colors"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
                     aria-label="Traccia successiva"
                   >
-                    <SkipForward className="h-4 w-4 text-background" />
+                    <SkipForward className="h-4 w-4 text-white" />
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium truncate text-background">
+                      <span className="text-sm font-medium truncate text-white">
                         {tracks[playingIndex]?.title}
                       </span>
-                      <span className="text-xs text-background/70 whitespace-nowrap ml-2">
+                      <span className="text-xs text-white/70 whitespace-nowrap ml-2">
                         {Math.floor((position * duration) / 1000 / 60)}:{String(Math.floor(((position * duration) / 1000) % 60)).padStart(2, '0')} / {Math.floor(duration / 1000 / 60)}:{String(Math.floor((duration / 1000) % 60)).padStart(2, '0')}
                       </span>
                     </div>
