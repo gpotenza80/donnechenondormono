@@ -7,6 +7,7 @@ interface Star {
   size: number;
   opacity: number;
   delay: number;
+  animation: string;
 }
 
 interface Cloud {
@@ -27,14 +28,17 @@ const NightSky = () => {
   useEffect(() => {
     const generateStars = () => {
       const starArray: Star[] = [];
-      for (let i = 0; i < 80; i++) {
+      const animations = ['twinkle', 'drift', 'pulse-gentle', 'float'];
+      
+      for (let i = 0; i < 120; i++) {
         starArray.push({
           id: i,
           x: Math.random() * 100,
           y: Math.random() * 100,
-          size: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.8 + 0.2,
-          delay: Math.random() * 4
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
+          delay: Math.random() * 8,
+          animation: animations[Math.floor(Math.random() * animations.length)]
         });
       }
       setStars(starArray);
@@ -114,7 +118,7 @@ const NightSky = () => {
         transition: 'background 2s ease-in-out'
       }}
     >
-      {/* Stelle scintillanti */}
+      {/* Stelle scintillanti con micro-animazioni */}
       {stars.map(star => (
         <div
           key={star.id}
@@ -125,7 +129,7 @@ const NightSky = () => {
             width: `${star.size}px`,
             height: `${star.size}px`,
             opacity: star.opacity,
-            animation: `twinkle ${3 + star.delay}s ease-in-out infinite`,
+            animation: `${star.animation} ${6 + star.delay}s ease-in-out infinite`,
             animationDelay: `${star.delay}s`
           }}
         />

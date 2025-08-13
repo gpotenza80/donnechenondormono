@@ -119,10 +119,27 @@ All colors MUST be HSL.
   }
 }
 
-/* Animazioni per le stelle */
+/* Micro-animazioni per le stelle - molto discrete */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+@keyframes drift {
+  0% { transform: translateY(0px) translateX(0px); }
+  33% { transform: translateY(-1px) translateX(0.5px); }
+  66% { transform: translateY(0.5px) translateX(-0.5px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-1.5px); }
 }
 
 @layer base {
