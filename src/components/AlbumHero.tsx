@@ -1,6 +1,7 @@
 const heroImage = "/lovable-uploads/a0043cdb-5907-4e05-9bfe-ce6521dfed4d.png";
 import { Button } from "@/components/ui/button";
 import { useCallback, useState } from "react";
+import { Play } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "#ascolta", label: "Ascolta" },
@@ -59,7 +60,7 @@ export default function AlbumHero() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
-              <a href="#brani" onClick={playFirst}>Ascolta l’album</a>
+              <a href="#brani" onClick={playFirst}>Ascolta l'album</a>
             </Button>
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
@@ -67,13 +68,20 @@ export default function AlbumHero() {
           </div>
           </div>
 
-        <div className="relative">
+        <div className="relative group cursor-pointer" onClick={playFirst}>
           <img
             src={heroImage}
-            alt="Copertina concettuale notturna, tonalità viola e ciano per l’album Donne che non dormono"
+            alt="Copertina concettuale notturna, tonalità viola e ciano per l'album Donne che non dormono"
             loading="lazy"
-            className="w-full h-auto"
+            className="w-full h-auto transition-all duration-300 group-hover:brightness-75"
           />
+          
+          {/* Play overlay */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="bg-primary/90 backdrop-blur-sm rounded-full p-6 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+              <Play className="w-12 h-12 text-primary-foreground fill-current" />
+            </div>
+          </div>
         </div>
       </div>
 
