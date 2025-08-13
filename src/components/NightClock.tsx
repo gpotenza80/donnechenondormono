@@ -23,38 +23,34 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
   }, [currentTrackIndex]);
 
   return (
-    <div className="w-full">
-      <div className="bg-card/60 backdrop-blur-sm border border-border rounded-xl p-6 shadow-elegant">
-        <div className="text-center mb-4">
-          <h3 className="text-lg font-medium text-foreground">Sette ore della notte</h3>
+    <div className="w-full max-w-sm">
+      <div className="bg-card/60 backdrop-blur-sm border border-border rounded-lg p-4 shadow-elegant">
+        <div className="text-center mb-3">
+          <h3 className="text-sm font-medium text-foreground">Sette ore della notte</h3>
         </div>
         
-        {/* Timeline orizzontale per mobile, verticale per desktop */}
-        <div className="relative">
-          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-border"></div>
-          <div className="md:hidden absolute top-4 left-0 right-0 h-px bg-border"></div>
-          
-          <div className="grid grid-cols-2 md:block gap-4 md:gap-0">
-            {timeSlots.map((slot, index) => (
-              <button
-                key={index} 
-                onClick={() => onTimeClick?.(index)}
-                className={`
-                  relative flex md:flex-row flex-col items-center md:mb-4 last:mb-0 p-2 rounded-lg transition-all duration-300 hover:bg-card/80 group
-                  ${index <= currentTrackIndex ? 'text-accent' : 'text-muted-foreground hover:text-foreground'}
-                `}
-              >
-                {/* Ora */}
+        {/* Timeline compatta */}
+        <div className="space-y-2">
+          {timeSlots.map((slot, index) => (
+            <button
+              key={index} 
+              onClick={() => onTimeClick?.(index)}
+              className={`
+                w-full flex items-center justify-between p-2 rounded-md transition-all duration-300 hover:bg-card/80 group text-left
+                ${index <= currentTrackIndex ? 'text-accent' : 'text-muted-foreground hover:text-foreground'}
+              `}
+            >
+              {/* Ora e punto */}
+              <div className="flex items-center gap-3">
                 <div className={`
-                  text-sm font-mono md:w-12 md:text-right md:mr-4 transition-colors duration-500
+                  text-xs font-mono transition-colors duration-500
                   ${index <= currentTrackIndex ? 'text-accent' : 'text-muted-foreground group-hover:text-foreground'}
                 `}>
                   {slot.hour}
                 </div>
                 
-                {/* Punto indicatore */}
                 <div className={`
-                  relative w-3 h-3 rounded-full border-2 transition-all duration-500 z-10 md:mx-0 mx-auto mb-2 md:mb-0
+                  w-2 h-2 rounded-full border transition-all duration-500
                   ${index <= currentTrackIndex 
                     ? 'bg-accent border-accent shadow-glow' 
                     : 'bg-background border-border group-hover:border-accent/50'}
@@ -63,17 +59,17 @@ const NightClock = ({ currentTrackIndex = 0, onTimeClick }: NightClockProps) => 
                     <div className="absolute inset-0 rounded-full bg-accent animate-pulse"></div>
                   )}
                 </div>
-                
-                {/* Titolo brano */}
-                <div className={`
-                  md:ml-4 text-xs transition-colors duration-500 text-center md:text-left
-                  ${index <= currentTrackIndex ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}
-                `}>
-                  {slot.label}
-                </div>
-              </button>
-            ))}
-          </div>
+              </div>
+              
+              {/* Titolo brano */}
+              <div className={`
+                text-xs transition-colors duration-500 truncate
+                ${index <= currentTrackIndex ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}
+              `}>
+                {slot.label}
+              </div>
+            </button>
+          ))}
         </div>
         
         {/* Stelle decorative */}

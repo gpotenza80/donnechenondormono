@@ -32,7 +32,7 @@ export default function ConceptSection() {
           </blockquote>
         </div>
         
-        <div className="lg:pl-8">
+        <div className="flex justify-start lg:justify-center">
           <NightClock onTimeClick={scrollToTracks} />
         </div>
       </div>

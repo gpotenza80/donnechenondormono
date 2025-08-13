@@ -119,6 +119,12 @@ All colors MUST be HSL.
   }
 }
 
+/* Animazioni per le stelle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
 @layer base {
   * {
     @apply border-border;
