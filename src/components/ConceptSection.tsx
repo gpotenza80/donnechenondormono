@@ -35,8 +35,8 @@ export default function ConceptSection() {
 
   return (
     <section id="concept" className="container mx-auto pt-6 md:pt-8 lg:pt-8 pb-10 md:pb-14 lg:pb-18">
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-        <div className="max-w-[760px] space-y-6">
+      <div className="flex flex-col lg:flex-row lg:gap-12 lg:items-start">
+        <div className="flex-1 max-w-[760px] space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Il concept</h2>
           <blockquote className="border-l-2 border-border pl-4 text-foreground max-w-[720px] leading-[1.55] space-y-3">
             <p className="text-lg md:text-xl">
@@ -48,7 +48,7 @@ export default function ConceptSection() {
           </blockquote>
         </div>
         
-        <div className="flex justify-start lg:justify-center">
+        <div className="lg:flex-shrink-0 lg:w-80 mt-6 lg:mt-0">
           <NightClock currentTrackIndex={currentTrackIndex} onTimeClick={scrollToTracks} />
         </div>
       </div>
