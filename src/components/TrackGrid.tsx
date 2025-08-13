@@ -9,14 +9,14 @@ const tracks = [
     time: "22:00",
     cover: "/lovable-uploads/5d957bbd-957a-414e-9bb0-a42e7c733d68.png",
     caption:
-      "Identità digitale e bug dell'anima: \"viva quando mi laggo, reale quando crasho\".",
+      "Identità digitale e bug dell'anima. «Viva quando mi laggo, reale quando crasho».",
   },
   {
     title: "ADDÀ PASSÀ",
     time: "23:00",
     cover: "/lovable-uploads/4d6c9b26-e1af-4cd8-83d1-67bdbfceffce.png",
     caption:
-      "Notte lunga dopo l'addio. \"Addà passà 'a nuttata\".",
+      "La prima notte senza te: paura, ricordi e la speranza che addà passà 'a nuttata.",
   },
   {
     title: "Bambenélla",
@@ -30,28 +30,28 @@ const tracks = [
     time: "01:00",
     cover: "/lovable-uploads/30e107ef-4697-4428-a8ce-21bc12f9b9b5.png",
     caption:
-      "Riconciliazione nervosa: quando amare significa scegliere la pace.",
+      "Quando amare significa scegliere la pace.",
   },
   {
     title: "Le mie catene",
     time: "02:00",
     cover: "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
     caption:
-      "Ballata di liberazione: tagliare corde antiche, scrivere un finale che non muoia.",
+      "Marcia di liberazione: recidere le catene per scrivere un finale che non muoia.",
   },
   {
     title: "Pena - Español",
     time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     caption:
-      "Tango moderno di attesa e ferita. In spagnolo.",
+      "Tango moderno di attesa e ferita. Versione in spagnolo.",
   },
   {
     title: "Pena - Italiano",
     time: "03:00",
     cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
     caption:
-      "Tango moderno di attesa e ferita. In italiano.",
+      "Tango moderno di attesa e ferita. Versione in italiano.",
   },
   {
     title: "Londra 2000",
