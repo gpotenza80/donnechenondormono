@@ -295,6 +295,32 @@ Y no es cierto que me falte paciencia
 Estoy sufriendo — ¡qué dolor tan grande!
 Te estoy esperando y sigo esperando
 Y penando… penando…`
+  },
+  "penaitaliano": {
+    title: "Pena - Italiano",
+    lyrics: `Pena, io sono in pena
+Pena, io sono in pena
+Pena tu mi hai messo in pena
+Pena mala pena tutta notte intera
+Pena senza pietà 
+
+Notte, io sto morendo
+Lento, a fuoco lento;
+Notte, fammi addormentare
+Penso e ti ripenso annego nel mio vino l'unico mio amico che non mi tradirà 
+
+Puoi chiedermi
+Tutto, tutto quello che vuoi
+Tutto, tutto quello che vuoi
+Tutto, tutto quello che ho
+Posso dare lo sai
+Posso darti lo sai
+
+E non è vero che non c'è la pazienza
+Io sto soffrendo, ahi che grande dolore
+Ti sto aspettando da ore 
+e sto penando ancora 
+e ancora`
   }
   // Altri testi verranno aggiunti qui
 };
