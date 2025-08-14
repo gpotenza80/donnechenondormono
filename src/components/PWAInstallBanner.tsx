@@ -81,21 +81,29 @@ const PWAInstallBanner = () => {
             </h3>
             <p className="text-xs text-warm-white/80 mb-2">
               {isIOS 
-                ? "Aggiungi alla schermata Home per accesso rapido"
-                : "Installa per un'esperienza migliore"
+                ? "Tocca ↗️ in basso > 'Aggiungi alla schermata Home'"
+                : "Premi il tasto per installare direttamente"
               }
             </p>
             
             <div className="flex gap-2">
-              {!isIOS && deferredPrompt && (
+              {isIOS ? (
+                <Button 
+                  onClick={handleDismiss}
+                  size="sm"
+                  className="bg-accent hover:bg-accent/90 text-night font-medium text-xs h-7 px-3"
+                >
+                  Capito
+                </Button>
+              ) : deferredPrompt ? (
                 <Button 
                   onClick={handleInstall}
                   size="sm"
                   className="bg-accent hover:bg-accent/90 text-night font-medium text-xs h-7 px-3"
                 >
-                  Installa
+                  📱 Installa App
                 </Button>
-              )}
+              ) : null}
               <Button 
                 onClick={handleDismiss}
                 variant="ghost"
