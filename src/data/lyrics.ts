@@ -109,6 +109,71 @@ Adda passa
 Adda passa tutta 
 A nuttata 
 e mò, t'aggià lassà fuí`
+  },
+  "bambenella": {
+    title: "Bambenélla",
+    lyrics: `So' Bambenélla, nisciuno me vére
+Pe' tutto 'o munno m'hann' fatt' girà
+Guardo annascuso 'o munno che vene
+E numm' accír pecché voglio sugnà
+
+I po' m'incàzz
+Ma piglio e me scàzz
+'A vita è 'a mia
+No, è 'a soja
+Me voglio appiccecà
+Cu chi m'aggia piglià
+Se no, cu te
+
+C' 'a bona manera
+Me vattéttero 'na sera
+Dice: "Pe' famme fa' 'o mestiere"
+Dice: "Co tengo cca'"
+
+Faccio OnlyFans
+'O Zallo s'ammocca
+Tene pur' 'a panz
+Iss pav e nun ten' speranz
+Me scorr' ncopp' all'app
+'Ncopp' a mille teng' 'e like
+Ma pe' mille so' sulo Bambenélla
+
+Chi nun ten' bellezz'
+Nun ten' creanz'
+E a me nun me ne fotte
+M'aggia magnà tutt' 'e cos'
+Pecché i' song' nu brand
+E facc' 'e fans pe' 'i cash
+Pecché i' so' chell'
+Che muglieréta nun è
+
+Quanno stut' 'stu telefono
+Sto sul' io ncopp' a 'stu munn'
+Me vesto e torn' a creatura
+A Bambenélla che vulév
+
+So' Bambenélla e faccio 'o mestiere
+E 'nzieme a ll'ate comm' a me aggia stà
+Guardo annascuso 'a ggente che passa
+Nu poco 'e sole appena me abbasta
+
+I po' m'incàzz
+Ma piglio e me scàzz
+'A vita è 'a mia
+No, è 'a soja
+Me voglio appiccecà
+Cu chi m'aggia piglià
+Se no, cu te
+
+C' 'a bona manera
+Me vattéttero 'na sera
+Dice: "Pe' famme fa' 'o mestiere"
+Dice: "Co tengo cca'"
+
+C' 'a bona manera
+Me vattéttero 'na sera
+Dice: "Pe' famme fa' 'o mestiere"
+Dice: "Co tengo cca'"`
   }
   // Altri testi verranno aggiunti qui
 };
