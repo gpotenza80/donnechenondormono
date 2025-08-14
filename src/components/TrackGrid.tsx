@@ -76,6 +76,7 @@ export default function TrackGrid() {
   const [duration, setDuration] = useState(0);
   const [lyricsModalOpen, setLyricsModalOpen] = useState(false);
   const [selectedTrackLyrics, setSelectedTrackLyrics] = useState<{title: string; lyrics: string} | null>(null);
+  const [lyricsTrackIndex, setLyricsTrackIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if ((window as any).SC?.Widget) {
@@ -294,6 +295,33 @@ export default function TrackGrid() {
     };
   }, []);
 
+  // Funzioni di navigazione per i testi
+  const goToPreviousLyricsTrack = () => {
+    if (lyricsTrackIndex === null) return;
+    
+    const prevIndex = lyricsTrackIndex > 0 ? lyricsTrackIndex - 1 : tracks.length - 1;
+    const prevTrack = tracks[prevIndex];
+    const lyrics = getTrackLyrics(prevTrack.title);
+    
+    if (lyrics) {
+      setSelectedTrackLyrics(lyrics);
+      setLyricsTrackIndex(prevIndex);
+    }
+  };
+
+  const goToNextLyricsTrack = () => {
+    if (lyricsTrackIndex === null) return;
+    
+    const nextIndex = lyricsTrackIndex < tracks.length - 1 ? lyricsTrackIndex + 1 : 0;
+    const nextTrack = tracks[nextIndex];
+    const lyrics = getTrackLyrics(nextTrack.title);
+    
+    if (lyrics) {
+      setSelectedTrackLyrics(lyrics);
+      setLyricsTrackIndex(nextIndex);
+    }
+  };
+
   return (
     <>
       <span id="brani" className="block h-0" aria-hidden="true" />
@@ -440,6 +468,7 @@ export default function TrackGrid() {
                           const lyrics = getTrackLyrics(t.title);
                           if (lyrics) {
                             setSelectedTrackLyrics(lyrics);
+                            setLyricsTrackIndex(idx);
                             setLyricsModalOpen(true);
                           }
                         }}
@@ -465,6 +494,10 @@ export default function TrackGrid() {
           onClose={() => setLyricsModalOpen(false)}
           trackTitle={selectedTrackLyrics.title}
           lyrics={selectedTrackLyrics.lyrics}
+          onPrevious={goToPreviousLyricsTrack}
+          onNext={goToNextLyricsTrack}
+          hasPrevious={lyricsTrackIndex !== null && lyricsTrackIndex > 0}
+          hasNext={lyricsTrackIndex !== null && lyricsTrackIndex < tracks.length - 1}
           isPlaying={isPlaying}
           currentPosition={position}
           duration={duration}
