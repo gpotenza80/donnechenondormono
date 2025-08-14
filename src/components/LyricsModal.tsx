@@ -37,9 +37,18 @@ export function LyricsModal({
   const [userScrolled, setUserScrolled] = useState(false);
   const autoScrollTimeoutRef = useRef<NodeJS.Timeout>();
 
+  // Attiva automaticamente l'autoscroll se è la traccia corrente
+  useEffect(() => {
+    if (isCurrentTrack && isPlaying && !autoScrollEnabled) {
+      setAutoScrollEnabled(true);
+      console.log('[LyricsModal] Auto-attivato autoscroll per traccia corrente');
+    }
+  }, [isCurrentTrack, isPlaying, autoScrollEnabled]);
+
   // Log per debug
   useEffect(() => {
     console.log('[LyricsModal] State update:', {
+      trackTitle,
       autoScrollEnabled,
       isCurrentTrack, 
       isPlaying,
@@ -47,34 +56,55 @@ export function LyricsModal({
       duration,
       userScrolled
     });
-  }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
+  }, [trackTitle, autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
 
   // Calculate scroll progress based on track position
   useEffect(() => {
-    if (!autoScrollEnabled || !isCurrentTrack || !isPlaying || userScrolled || !scrollContainerRef.current || duration === 0) {
+    if (!autoScrollEnabled || !isCurrentTrack || !isPlaying || userScrolled || !scrollContainerRef.current) {
+      return;
+    }
+
+    if (duration === 0 || currentPosition < 0) {
+      console.log('[LyricsModal] Skip scroll - invalid duration/position:', { duration, currentPosition });
       return;
     }
 
     const container = scrollContainerRef.current;
     const scrollHeight = container.scrollHeight - container.clientHeight;
-    const progress = Math.min(currentPosition / duration, 1);
-    const targetScrollTop = scrollHeight * progress;
+    
+    if (scrollHeight <= 0) {
+      console.log('[LyricsModal] Skip scroll - no scrollable content');
+      return;
+    }
+
+    // Calcola il progresso come percentuale
+    const progress = Math.min(Math.max(currentPosition / duration, 0), 1);
+    const targetScrollTop = Math.round(scrollHeight * progress);
 
     console.log('[LyricsModal] Auto scrolling:', { 
+      currentPosition: Math.round(currentPosition),
+      duration: Math.round(duration),
       progress: Math.round(progress * 100) + '%', 
-      scrollTop: Math.round(targetScrollTop),
-      maxScroll: scrollHeight 
+      targetScrollTop,
+      scrollHeight
     });
 
-    container.scrollTo({
-      top: targetScrollTop,
-      behavior: 'smooth'
-    });
+    // Scroll più fluido su mobile
+    if ('scrollBehavior' in container.style) {
+      container.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    } else {
+      // Fallback per browser più vecchi
+      container.scrollTop = targetScrollTop;
+    }
   }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
 
   // Handle manual scroll detection
   const handleScroll = () => {
     if (autoScrollEnabled && isCurrentTrack && isPlaying) {
+      console.log('[LyricsModal] Manual scroll detected');
       setUserScrolled(true);
       
       // Clear existing timeout
@@ -82,10 +112,11 @@ export function LyricsModal({
         clearTimeout(autoScrollTimeoutRef.current);
       }
       
-      // Re-enable auto scroll after 3 seconds of no manual scrolling
+      // Re-enable auto scroll after 4 seconds on mobile (più tempo per il touch)
       autoScrollTimeoutRef.current = setTimeout(() => {
+        console.log('[LyricsModal] Re-enabling autoscroll after manual scroll');
         setUserScrolled(false);
-      }, 3000);
+      }, 4000);
     }
   };
 
@@ -172,11 +203,13 @@ export function LyricsModal({
           {/* Debug info for mobile testing */}
           {process.env.NODE_ENV === 'development' && (
             <div className="text-xs text-muted-foreground mt-4 p-2 bg-muted/20 rounded">
-              <div>AutoScroll: {autoScrollEnabled ? 'ON' : 'OFF'}</div>
-              <div>Current Track: {isCurrentTrack ? 'YES' : 'NO'}</div>
-              <div>Playing: {isPlaying ? 'YES' : 'NO'}</div>
-              <div>Position: {Math.round(currentPosition)}s / {Math.round(duration)}s</div>
-              <div>User Scrolled: {userScrolled ? 'YES' : 'NO'}</div>
+              <div><strong>Track:</strong> {trackTitle}</div>
+              <div><strong>AutoScroll:</strong> {autoScrollEnabled ? '✅ ON' : '❌ OFF'}</div>
+              <div><strong>Current Track:</strong> {isCurrentTrack ? '✅ YES' : '❌ NO'}</div>
+              <div><strong>Playing:</strong> {isPlaying ? '▶️ YES' : '⏸️ NO'}</div>
+              <div><strong>Time:</strong> {Math.round(currentPosition)}s / {Math.round(duration)}s</div>
+              <div><strong>Progress:</strong> {duration > 0 ? Math.round((currentPosition/duration)*100) + '%' : '0%'}</div>
+              <div><strong>User Scrolled:</strong> {userScrolled ? '👆 YES' : '🤖 NO'}</div>
             </div>
           )}
         </div>
