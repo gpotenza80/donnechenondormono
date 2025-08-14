@@ -53,6 +53,62 @@ non urlo in piazza, non firmo petizioni
 la mia rivolta è saltare le versioni
 ci hanno dato troppe scelte
 La mia è: restare disconnessa`
+  },
+  "addapassa": {
+    title: "Addà Passà",
+    lyrics: `Stanotte nu vogl chiù durmí
+Tu m'accis e nu poss capí
+O saie che t'agg scurdà
+Ma nu dorm senza nà verità 
+
+Ma nun c'affacc mò a sbarià 
+A notte e longa longa longa
+E nun a poss suppurtà
+
+Si stanott fà paur
+Paur 
+perché 
+Sta nott 
+è a prima nott 
+Senz e té
+
+Ma Adda passà
+Adda passà
+Adda passa tutta 
+A nuttata 
+e mò io ch'aggia fa?
+
+Si sta voce allucca fort
+È pe te fa sentí
+A vogl e sbatt a port
+Ma tu stai già a fuì
+
+Stanott nú vogli chiù durmì
+Tu m'accis senza murí
+Dimani m'aggià scetà
+Me scacqu'a faccia e vag a faticà
+
+Si a sti uocchie fai paur
+Paur e me verè
+Dimani aggià ascí for
+senz addor rò cafè
+
+Ma Adda passa 
+Adda passa
+Adda passa tutta 
+A nuttata 
+e io mò, io mò t'aggià lassà
+
+Si sta voce allucca fort
+È pe te fa sentí
+A vogl e sbatt a port
+Ma io t'aggia lassà fuì 
+
+Ma Adda passa 
+Adda passa
+Adda passa tutta 
+A nuttata 
+e mò, t'aggià lassà fuí`
   }
   // Altri testi verranno aggiunti qui
 };
