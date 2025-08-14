@@ -36,6 +36,7 @@ export function LyricsModal({
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(false);
   const [userScrolled, setUserScrolled] = useState(false);
   const autoScrollTimeoutRef = useRef<NodeJS.Timeout>();
+  const isAutoScrollingRef = useRef(false); // Track when we're auto-scrolling
 
   // Attiva automaticamente l'autoscroll se è la traccia corrente
   useEffect(() => {
@@ -64,8 +65,15 @@ export function LyricsModal({
       return;
     }
 
-    if (duration === 0 || currentPosition < 0) {
-      console.log('[LyricsModal] Skip scroll - invalid duration/position:', { duration, currentPosition });
+    // Convert duration from milliseconds to seconds if needed
+    const durationInSeconds = duration > 1000 ? duration / 1000 : duration;
+    
+    if (durationInSeconds === 0 || currentPosition < 0) {
+      console.log('[LyricsModal] Skip scroll - invalid duration/position:', { 
+        duration, 
+        durationInSeconds,
+        currentPosition 
+      });
       return;
     }
 
@@ -78,31 +86,39 @@ export function LyricsModal({
     }
 
     // Calcola il progresso come percentuale
-    const progress = Math.min(Math.max(currentPosition / duration, 0), 1);
+    const progress = Math.min(Math.max(currentPosition / durationInSeconds, 0), 1);
     const targetScrollTop = Math.round(scrollHeight * progress);
 
     console.log('[LyricsModal] Auto scrolling:', { 
-      currentPosition: Math.round(currentPosition),
+      currentPosition: Math.round(currentPosition * 10) / 10,
       duration: Math.round(duration),
+      durationInSeconds: Math.round(durationInSeconds),
       progress: Math.round(progress * 100) + '%', 
       targetScrollTop,
       scrollHeight
     });
 
-    // Scroll più fluido su mobile
-    if ('scrollBehavior' in container.style) {
-      container.scrollTo({
-        top: targetScrollTop,
-        behavior: 'smooth'
-      });
-    } else {
-      // Fallback per browser più vecchi
-      container.scrollTop = targetScrollTop;
-    }
+    // Mark as auto-scrolling to prevent manual scroll detection
+    isAutoScrollingRef.current = true;
+    
+    // Perform the scroll
+    container.scrollTop = targetScrollTop;
+    
+    // Reset auto-scrolling flag after a short delay
+    setTimeout(() => {
+      isAutoScrollingRef.current = false;
+    }, 100);
+    
   }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
 
   // Handle manual scroll detection
   const handleScroll = () => {
+    // Don't treat auto-scroll as manual scroll
+    if (isAutoScrollingRef.current) {
+      console.log('[LyricsModal] Auto-scroll event ignored');
+      return;
+    }
+    
     if (autoScrollEnabled && isCurrentTrack && isPlaying) {
       console.log('[LyricsModal] Manual scroll detected');
       setUserScrolled(true);
