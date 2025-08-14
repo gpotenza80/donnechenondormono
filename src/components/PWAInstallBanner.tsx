@@ -68,7 +68,7 @@ const PWAInstallBanner = () => {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
+    <div className="fixed top-4 left-4 right-4 z-50 animate-in slide-in-from-top-2 duration-300">
       <div className="max-w-sm mx-auto bg-night/95 backdrop-blur-sm border border-accent/30 rounded-xl p-4 shadow-elegant">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
