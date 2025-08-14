@@ -82,9 +82,9 @@ export function LyricsModal({
       return;
     }
 
-    // Throttle scroll updates to every 500ms for smoother movement
+    // Throttle scroll updates to every 1.5 seconds for much smoother, slower movement
     const now = Date.now();
-    if (now - lastScrollTimeRef.current < 500) {
+    if (now - lastScrollTimeRef.current < 1500) {
       return;
     }
     lastScrollTimeRef.current = now;
