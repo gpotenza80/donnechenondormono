@@ -68,41 +68,41 @@ const PWAInstallBanner = () => {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
-    <div className="fixed inset-x-4 top-4 z-50 animate-in slide-in-from-top-2 duration-500">
-      <div className="max-w-md mx-auto bg-gradient-primary p-6 rounded-2xl shadow-glow border border-accent/20">
-        <div className="flex items-start gap-4">
-          <div className="w-16 h-16 rounded-xl bg-warm-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0 ring-2 ring-accent/30">
-            <Download className="w-8 h-8 text-warm-white" />
+    <div className="fixed bottom-4 left-4 right-4 z-50 animate-in slide-in-from-bottom-2 duration-300">
+      <div className="max-w-sm mx-auto bg-night/95 backdrop-blur-sm border border-accent/30 rounded-xl p-4 shadow-elegant">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
+            <Download className="w-5 h-5 text-warm-white" />
           </div>
           
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-bold text-warm-white mb-2">
-              📱 Installa l'App
+            <h3 className="text-sm font-semibold text-warm-white mb-1">
+              Installa l'app
             </h3>
-            <p className="text-sm text-warm-white/90 mb-4 leading-relaxed">
+            <p className="text-xs text-warm-white/80 mb-2">
               {isIOS 
-                ? "Tocca il pulsante di condivisione ↗️ e seleziona 'Aggiungi alla schermata Home' per avere accesso istantaneo"
-                : "Aggiungi 'Donne che non dormono' alla tua schermata home per un'esperienza a schermo intero"
+                ? "Aggiungi alla schermata Home per accesso rapido"
+                : "Installa per un'esperienza migliore"
               }
             </p>
             
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {!isIOS && deferredPrompt && (
                 <Button 
                   onClick={handleInstall}
                   size="sm"
-                  className="bg-accent hover:bg-accent/90 text-night font-bold px-4 py-2 shadow-lg"
+                  className="bg-accent hover:bg-accent/90 text-night font-medium text-xs h-7 px-3"
                 >
-                  🚀 Installa Ora
+                  Installa
                 </Button>
               )}
               <Button 
                 onClick={handleDismiss}
                 variant="ghost"
                 size="sm"
-                className="text-warm-white/80 hover:text-warm-white hover:bg-warm-white/10 px-3"
+                className="text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10 text-xs h-7 px-2"
               >
-                Più tardi
+                Non ora
               </Button>
             </div>
           </div>
@@ -111,9 +111,9 @@ const PWAInstallBanner = () => {
             onClick={handleDismiss}
             variant="ghost"
             size="icon"
-            className="w-8 h-8 text-warm-white/70 hover:text-warm-white hover:bg-warm-white/10 flex-shrink-0 rounded-full"
+            className="w-6 h-6 text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10 flex-shrink-0"
           >
-            <X className="w-4 h-4" />
+            <X className="w-3 h-3" />
           </Button>
         </div>
       </div>
