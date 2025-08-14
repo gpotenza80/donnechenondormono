@@ -174,6 +174,65 @@ C' 'a bona manera
 Me vattéttero 'na sera
 Dice: "Pe' famme fa' 'o mestiere"
 Dice: "Co tengo cca'"`
+  },
+  "jafapacecumme": {
+    title: "Ja, fa' pace cu mmé",
+    lyrics: `E staje arraggiat' cu mmé
+E nun 'o vuò sapé
+E fa' pace cu mmé
+E nun 'o vuò sapé
+Staje arraggiat' cu mmé
+
+Ma che so' tutte 'sti parole?
+Leva 'a man' mò mò mò.
+Pecché simmo 'na cosa sola,
+Ja, fa' pace cu mmé.
+E nun 'o voglio sapé,
+E a, fa' pace cu mmé.
+Tu a fa' pace cu mmé.
+
+Ma nun teng voglia mò mò mò
+'e me appiccicà,
+Pecché tengo sulamente voglia
+'e te scetà,
+'e te vasà.
+Pe fa' ammore cu té
+E nun 'o voglio sapé,
+e a, fa' pace cu mmé.
+E Nun 'o voglio sapé.
+
+A vita è nu mare e na tempest
+E nuje 'a barca l'amma adderezzà
+nun putimmo fa' comme 'e creature
+A ci appeccecà,
+Pecché simmo 'na cosa sola.
+E a, fa' pace cu mmé.
+E Nun 'o voglio sapé.
+E Staje arraggiat' cu mmé,
+E Nun 'o voglio sapé.
+
+Nun ti 'ntussicà,
+O vir che m' vuò bene,
+O vir,
+Nun t'arraggià.
+
+E,
+che cosa bella
+Quando se,
+se si fa pace,
+Perché
+tutto il resto
+non c'è,
+e ritorna il sole.
+
+E,
+Quel sorriso dolce 
+che è in te
+È ritornato 
+Per me 
+Basta uno sguardo 
+E 
+E ritorna il sole.`
   }
   // Altri testi verranno aggiunti qui
 };
