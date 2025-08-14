@@ -468,7 +468,8 @@ export default function TrackGrid() {
           isPlaying={isPlaying}
           currentPosition={position}
           duration={duration}
-          isCurrentTrack={selectedTrackLyrics.title === tracks[playingIndex || 0]?.title}
+          isCurrentTrack={playingIndex !== null && 
+            selectedTrackLyrics.title.toLowerCase() === tracks[playingIndex]?.title.toLowerCase()}
         />
       )}
     </>

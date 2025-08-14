@@ -37,6 +37,18 @@ export function LyricsModal({
   const [userScrolled, setUserScrolled] = useState(false);
   const autoScrollTimeoutRef = useRef<NodeJS.Timeout>();
 
+  // Log per debug
+  useEffect(() => {
+    console.log('[LyricsModal] State update:', {
+      autoScrollEnabled,
+      isCurrentTrack, 
+      isPlaying,
+      currentPosition,
+      duration,
+      userScrolled
+    });
+  }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
+
   // Calculate scroll progress based on track position
   useEffect(() => {
     if (!autoScrollEnabled || !isCurrentTrack || !isPlaying || userScrolled || !scrollContainerRef.current || duration === 0) {
@@ -47,6 +59,12 @@ export function LyricsModal({
     const scrollHeight = container.scrollHeight - container.clientHeight;
     const progress = Math.min(currentPosition / duration, 1);
     const targetScrollTop = scrollHeight * progress;
+
+    console.log('[LyricsModal] Auto scrolling:', { 
+      progress: Math.round(progress * 100) + '%', 
+      scrollTop: Math.round(targetScrollTop),
+      maxScroll: scrollHeight 
+    });
 
     container.scrollTo({
       top: targetScrollTop,
@@ -100,7 +118,10 @@ export function LyricsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[85vh] bg-background/95 backdrop-blur-sm border-border/50">
+      <DialogContent 
+        className="max-w-2xl max-h-[85vh] bg-background/95 backdrop-blur-sm border-border/50"
+        aria-describedby="lyrics-description"
+      >
         <DialogHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <div className="flex items-center gap-4">
             <DialogTitle className="text-xl font-bold text-foreground">
@@ -139,11 +160,25 @@ export function LyricsModal({
           onScroll={handleScroll}
           className="flex-1 overflow-y-auto pr-4 max-h-[60vh] scroll-smooth"
         >
-          <div className="font-mono text-sm text-foreground/90 whitespace-pre-line leading-7">
+          <div 
+            id="lyrics-description"
+            className="font-mono text-sm text-foreground/90 whitespace-pre-line leading-7"
+          >
             {formattedLyrics}
           </div>
           {/* Extra padding at bottom for better autoscroll experience */}
           <div className="h-32" />
+          
+          {/* Debug info for mobile testing */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="text-xs text-muted-foreground mt-4 p-2 bg-muted/20 rounded">
+              <div>AutoScroll: {autoScrollEnabled ? 'ON' : 'OFF'}</div>
+              <div>Current Track: {isCurrentTrack ? 'YES' : 'NO'}</div>
+              <div>Playing: {isPlaying ? 'YES' : 'NO'}</div>
+              <div>Position: {Math.round(currentPosition)}s / {Math.round(duration)}s</div>
+              <div>User Scrolled: {userScrolled ? 'YES' : 'NO'}</div>
+            </div>
+          )}
         </div>
 
         {/* Navigation buttons */}
