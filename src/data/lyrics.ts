@@ -272,6 +272,29 @@ per romper le catene del mio boia,
 per diventare un'altra nella storia,
 per ammazzare il mondo con la gioia,
 per scrivere un finale che non muoia.`
+  },
+  "penaespanol": {
+    title: "Pena - Español",
+    lyrics: `Pena, yo siento pena
+Pena, por tu condena
+Pena, tú me diste pena
+Pena mala, pena — toda la noche entera
+Pena sin piedad
+
+Noche, me estoy muriendo
+Lenta, a fuego lento
+Noche, déjame dormir
+Pienso y te recuerdo
+Me ahogo en mi vino — mi único consuelo, fiel hasta el fin
+
+Pídeme todo, todo lo que tú quieras
+Todo, todo lo que yo soy
+Todo lo que tengo es tuyo si lo quieres
+Te lo doy — tú ya lo sabes
+Y no es cierto que me falte paciencia
+Estoy sufriendo — ¡qué dolor tan grande!
+Te estoy esperando y sigo esperando
+Y penando… penando…`
   }
   // Altri testi verranno aggiunti qui
 };
