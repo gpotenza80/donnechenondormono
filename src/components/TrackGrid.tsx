@@ -49,18 +49,18 @@ const tracks = [
       "Tango moderno di attesa e ferita. Versione in spagnolo.",
   },
   {
-    title: "Londra 2000",
-    time: "04:00",
-    cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
-    caption:
-      "Cartolina emotiva: ricordi e città come specchi.",
-  },
-  {
     title: "Pena - Italiano",
     time: "03:00",
     cover: "/lovable-uploads/a987e938-ebfb-45fc-a615-15783e121b2f.png",
     caption:
       "Tango moderno di attesa e ferita. Versione in italiano.",
+  },
+  {
+    title: "Londra 2000",
+    time: "04:00",
+    cover: "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
+    caption:
+      "Cartolina emotiva: ricordi e città come specchi.",
   },
 ] as const;
 
