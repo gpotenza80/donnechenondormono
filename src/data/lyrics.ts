@@ -321,6 +321,56 @@ Io sto soffrendo, ahi che grande dolore
 Ti sto aspettando da ore 
 e sto penando ancora 
 e ancora`
+  },
+  "londra2000": {
+    title: "Londra 2000",
+    lyrics: `Dove sono andati a finire i nostri vent'anni?
+Nel fumo di Londra o versati nell'acqua del Tamigi
+Il 2000 e il nuovo millennio
+Il giubileo e il bug
+che poi non c'era mai stato
+
+Noi che venivamo dai quartieri di cemento
+i parchi di Londra
+Un incantesimo credibile
+Il concord sopra di noi e l'Europa unita
+Era qualcosa di possibile
+
+e Avere è avere
+vent'anni
+Ci sarà ancora tempo
+Per decidere chi sarai
+Ci sarà ancora tempo
+Per imparare e per rischiare
+Ma avere vent'anni                          
+è qualcosa che non ritorna    
+
+Dove sono andati a rinchiudere i nostri vent'anni?
+In quella stanza, con le chiavi lasciate sul double decker
+Odierò quella moquette ci galleggiavano i miei sogni
+E gli esami ancora tutti da fare
+
+ e Avere è avere
+vent'anni
+Ci sarà ancora tempo
+Per decidere chi sarai
+Ci sarà ancora tempo
+Per imparare e per rischiare
+Ma avere vent'anni                          
+è qualcosa che non ritorna
+
+Ma era bello perché
+Nò la fame non farò
+Un lavapiatti non sarò
+
+e Avere è avere
+vent'anni
+Ci sarà ancora tempo
+Per decidere chi sarai
+Ci sarà ancora tempo
+Per imparare e per rischiare
+Ma lo spirito dei vent'anni
+lui si che ritorna!`
   }
   // Altri testi verranno aggiunti qui
 };
