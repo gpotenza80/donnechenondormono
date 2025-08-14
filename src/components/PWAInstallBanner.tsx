@@ -68,52 +68,54 @@ const PWAInstallBanner = () => {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 z-50 bg-night/95 backdrop-blur-sm border border-indigo-500/30 rounded-xl p-4 shadow-elegant">
-      <div className="flex items-start gap-3">
-        <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-          <Download className="w-6 h-6 text-warm-white" />
-        </div>
-        
-        <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-warm-white mb-1">
-            Installa l'app
-          </h3>
-          <p className="text-sm text-warm-white/80 mb-3">
-            {isIOS 
-              ? "Tocca il pulsante di condivisione e seleziona 'Aggiungi alla schermata Home'"
-              : "Aggiungi Donne che non dormono alla tua schermata home per un accesso rapido"
-            }
-          </p>
-          
-          <div className="flex gap-2">
-            {!isIOS && deferredPrompt && (
-              <Button 
-                onClick={handleInstall}
-                size="sm"
-                className="bg-accent hover:bg-accent/90 text-night font-medium"
-              >
-                Installa
-              </Button>
-            )}
-            <Button 
-              onClick={handleDismiss}
-              variant="ghost"
-              size="sm"
-              className="text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10"
-            >
-              Non ora
-            </Button>
+    <div className="fixed inset-x-4 top-4 z-50 animate-in slide-in-from-top-2 duration-500">
+      <div className="max-w-md mx-auto bg-gradient-primary p-6 rounded-2xl shadow-glow border border-accent/20">
+        <div className="flex items-start gap-4">
+          <div className="w-16 h-16 rounded-xl bg-warm-white/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0 ring-2 ring-accent/30">
+            <Download className="w-8 h-8 text-warm-white" />
           </div>
+          
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold text-warm-white mb-2">
+              📱 Installa l'App
+            </h3>
+            <p className="text-sm text-warm-white/90 mb-4 leading-relaxed">
+              {isIOS 
+                ? "Tocca il pulsante di condivisione ↗️ e seleziona 'Aggiungi alla schermata Home' per avere accesso istantaneo"
+                : "Aggiungi 'Donne che non dormono' alla tua schermata home per un'esperienza a schermo intero"
+              }
+            </p>
+            
+            <div className="flex gap-3">
+              {!isIOS && deferredPrompt && (
+                <Button 
+                  onClick={handleInstall}
+                  size="sm"
+                  className="bg-accent hover:bg-accent/90 text-night font-bold px-4 py-2 shadow-lg"
+                >
+                  🚀 Installa Ora
+                </Button>
+              )}
+              <Button 
+                onClick={handleDismiss}
+                variant="ghost"
+                size="sm"
+                className="text-warm-white/80 hover:text-warm-white hover:bg-warm-white/10 px-3"
+              >
+                Più tardi
+              </Button>
+            </div>
+          </div>
+          
+          <Button
+            onClick={handleDismiss}
+            variant="ghost"
+            size="icon"
+            className="w-8 h-8 text-warm-white/70 hover:text-warm-white hover:bg-warm-white/10 flex-shrink-0 rounded-full"
+          >
+            <X className="w-4 h-4" />
+          </Button>
         </div>
-        
-        <Button
-          onClick={handleDismiss}
-          variant="ghost"
-          size="icon"
-          className="w-8 h-8 text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10 flex-shrink-0"
-        >
-          <X className="w-4 h-4" />
-        </Button>
       </div>
     </div>
   );
