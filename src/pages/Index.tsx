@@ -4,7 +4,7 @@ import TrackGrid from "@/components/TrackGrid";
 import AboutSection from "@/components/PressSection";
 import SiteFooter from "@/components/SiteFooter";
 import NightSky from "@/components/NightSky";
-import PWAInstallBanner from "@/components/PWAInstallBanner";
+
 
 const Index = () => {
   return (
@@ -17,7 +17,7 @@ const Index = () => {
         <AboutSection />
         <SiteFooter />
       </div>
-      <PWAInstallBanner />
+      
     </main>
   );
 };
