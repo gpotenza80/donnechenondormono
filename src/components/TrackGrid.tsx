@@ -5,60 +5,70 @@ import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 import { LyricsModal } from "@/components/LyricsModal";
 import { getTrackLyrics } from "@/data/lyrics";
 
+// Import delle immagini
+import cover1 from "/lovable-uploads/5d957bbd-957a-414e-9bb0-a42e7c733d68.png";
+import cover2 from "/lovable-uploads/4d6c9b26-e1af-4cd8-83d1-67bdbfceffce.png";
+import cover3 from "/lovable-uploads/809f9868-c327-48a9-97ae-507c4f940dd2.png";
+import cover4 from "/lovable-uploads/30e107ef-4697-4428-a8ce-21bc12f9b9b5.png";
+import cover5 from "/lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png";
+import cover6 from "/lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png";
+import cover7 from "/lovable-uploads/620d31bd-53ad-4350-8915-9f9c0b3c6172.png";
+import cover8 from "/lovable-uploads/3aac9be1-6a82-42b8-9027-872eda669c4a.png";
+
 const tracks = [
   {
     title: "DISCONNESSA",
     time: "22:00",
-    cover: "./lovable-uploads/5d957bbd-957a-414e-9bb0-a42e7c733d68.png",
+    cover: cover1,
     caption:
       "Identità digitale e bug dell'anima. «Viva quando mi laggo, reale quando crasho».",
   },
   {
     title: "ADDÀ PASSÀ",
     time: "23:00",
-    cover: "./lovable-uploads/4d6c9b26-e1af-4cd8-83d1-67bdbfceffce.png",
+    cover: cover2,
     caption:
       "La prima notte senza te: paura, ricordi e la speranza che addà passà 'a nuttata.",
   },
   {
     title: "Bambenélla",
     time: "00:00",
-    cover: "./lovable-uploads/809f9868-c327-48a9-97ae-507c4f940dd2.png",
+    cover: cover3,
     caption:
       "Ritratto teatrale-metropolitano: corpo, lavoro e piattaforme. Ironia amara.",
   },
   {
     title: "Ja, fa' pace cu mmé",
     time: "01:00",
-    cover: "./lovable-uploads/30e107ef-4697-4428-a8ce-21bc12f9b9b5.png",
+    cover: cover4,
     caption:
       "Quando amare significa scegliere la pace.",
   },
   {
     title: "Le mie catene",
     time: "02:00",
-    cover: "./lovable-uploads/e25ec76a-2ce7-4235-b6b9-bc1b0baff516.png",
+    cover: cover5,
     caption:
       "Marcia di liberazione: recidere le catene per scrivere un finale che non muoia.",
   },
   {
     title: "Pena - Español",
     time: "03:00",
-    cover: "./lovable-uploads/798ab651-37e4-42bf-a8f5-85c339d070de.png",
+    cover: cover6,
     caption:
       "Tango moderno di attesa e ferita. Versione in spagnolo.",
   },
   {
     title: "Pena - Italiano",
     time: "03:00",
-    cover: "./lovable-uploads/620d31bd-53ad-4350-8915-9f9c0b3c6172.png",
+    cover: cover7,
     caption:
       "Tango moderno di attesa e ferita. Versione in italiano.",
   },
   {
     title: "Londra 2000",
     time: "04:00",
-    cover: "./lovable-uploads/3aac9be1-6a82-42b8-9027-872eda669c4a.png",
+    cover: cover8,
     caption:
       "Cartolina emotiva: ricordi e città come specchi.",
   },
