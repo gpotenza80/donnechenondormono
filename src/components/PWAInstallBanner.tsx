@@ -68,61 +68,45 @@ const PWAInstallBanner = () => {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
-    <div className="fixed top-4 left-4 right-4 z-50 animate-in slide-in-from-top-2 duration-300">
-      <div className="max-w-sm mx-auto bg-night/95 backdrop-blur-sm border border-accent/30 rounded-xl p-4 shadow-elegant">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-            <Download className="w-5 h-5 text-warm-white" />
-          </div>
-          
+    <div className="fixed top-4 right-4 z-50 animate-in slide-in-from-top-2 duration-300">
+      <div className="max-w-xs bg-night/80 backdrop-blur-sm border border-warm-white/10 rounded-lg p-3 shadow-lg">
+        <div className="flex items-start gap-2">          
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-warm-white mb-1">
-              Installa l'app
-            </h3>
-            <p className="text-xs text-warm-white/80 mb-2">
+            <p className="text-xs text-warm-white/90 mb-2">
               {isIOS 
-                ? "Tocca ↗️ in basso > 'Aggiungi alla schermata Home'"
-                : "Premi il tasto per installare direttamente"
+                ? "📱 Aggiungi alla Home: tocca ↗️ > Aggiungi"
+                : "📱 Installa l'app sul dispositivo"
               }
             </p>
             
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               {isIOS ? (
                 <Button 
                   onClick={handleDismiss}
                   size="sm"
-                  className="bg-accent hover:bg-accent/90 text-night font-medium text-xs h-7 px-3"
+                  className="bg-warm-white/20 hover:bg-warm-white/30 text-warm-white text-xs h-6 px-2"
                 >
-                  Capito
+                  OK
                 </Button>
               ) : deferredPrompt ? (
                 <Button 
                   onClick={handleInstall}
                   size="sm"
-                  className="bg-accent hover:bg-accent/90 text-night font-medium text-xs h-7 px-3"
+                  className="bg-accent hover:bg-accent/90 text-night text-xs h-6 px-2"
                 >
-                  📱 Installa App
+                  Installa
                 </Button>
               ) : null}
               <Button 
                 onClick={handleDismiss}
                 variant="ghost"
                 size="sm"
-                className="text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10 text-xs h-7 px-2"
+                className="text-warm-white/50 hover:text-warm-white/80 text-xs h-6 px-2"
               >
-                Non ora
+                ✕
               </Button>
             </div>
           </div>
-          
-          <Button
-            onClick={handleDismiss}
-            variant="ghost"
-            size="icon"
-            className="w-6 h-6 text-warm-white/60 hover:text-warm-white hover:bg-warm-white/10 flex-shrink-0"
-          >
-            <X className="w-3 h-3" />
-          </Button>
         </div>
       </div>
     </div>
