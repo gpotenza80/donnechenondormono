@@ -90,14 +90,27 @@ export function LyricsModal({
     lastScrollTimeRef.current = now;
 
     // currentPosition è già normalizzato 0-1 dal TrackGrid
-    // Usa direttamente questo valore per il progresso
-    const progress = Math.min(Math.max(currentPosition, 0), 1);
-    const targetScrollTop = Math.round(scrollHeight * progress);
+    // Inizia a scrollare solo dopo il 15% della canzone per non perdere il filo
+    const scrollStartThreshold = 0.15;
+    const rawProgress = Math.min(Math.max(currentPosition, 0), 1);
+    
+    if (rawProgress < scrollStartThreshold) {
+      console.log('[LyricsModal] Skip scroll - still in intro phase:', { 
+        progress: Math.round(rawProgress * 100) + '%',
+        threshold: Math.round(scrollStartThreshold * 100) + '%'
+      });
+      return;
+    }
+
+    // Ricalcola il progresso partendo dal 15% fino al 100%
+    const adjustedProgress = Math.min((rawProgress - scrollStartThreshold) / (1 - scrollStartThreshold), 1);
+    const targetScrollTop = Math.round(scrollHeight * adjustedProgress);
 
     console.log('[LyricsModal] Auto scrolling:', { 
       currentPosition: Math.round(currentPosition * 1000) / 1000,
       duration: Math.round(duration),
-      progress: Math.round(progress * 100) + '%', 
+      rawProgress: Math.round(rawProgress * 100) + '%',
+      adjustedProgress: Math.round(adjustedProgress * 100) + '%', 
       targetScrollTop,
       scrollHeight
     });
