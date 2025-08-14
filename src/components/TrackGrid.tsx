@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
+import { LyricsModal } from "@/components/LyricsModal";
+import { getTrackLyrics } from "@/data/lyrics";
 
 const tracks = [
   {
@@ -72,6 +74,8 @@ export default function TrackGrid() {
   const [currentTrackInfo, setCurrentTrackInfo] = useState<any>(null);
   const [position, setPosition] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [lyricsModalOpen, setLyricsModalOpen] = useState(false);
+  const [selectedTrackLyrics, setSelectedTrackLyrics] = useState<{title: string; lyrics: string} | null>(null);
 
   useEffect(() => {
     if ((window as any).SC?.Widget) {
@@ -431,15 +435,19 @@ export default function TrackGrid() {
                       <span itemProp="description">{t.caption}</span>
                     </div>
                     <div className="mt-3 flex gap-2">
-                      <a 
-                        href={`/pdf/${t.title.toLowerCase().replace(/[àáâäã]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[,'']/g, '').replace(/[\s]/g, '-').replace(/[ñ]/g, 'n').replace(/[ç]/g, 'c')}.pdf`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
-                        aria-label={`Leggi il testo di ${t.title} (PDF)`}
+                      <button 
+                        onClick={() => {
+                          const lyrics = getTrackLyrics(t.title);
+                          if (lyrics) {
+                            setSelectedTrackLyrics(lyrics);
+                            setLyricsModalOpen(true);
+                          }
+                        }}
+                        className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2 bg-transparent border-none cursor-pointer"
+                        aria-label={`Leggi il testo di ${t.title}`}
                       >
-                        Testo PDF
-                      </a>
+                        Mostra testo
+                      </button>
                     </div>
                   </CardContent>
                   </Card>
@@ -449,6 +457,16 @@ export default function TrackGrid() {
           </div>
         </div>
       </section>
+      
+      {/* Modal per i testi */}
+      {selectedTrackLyrics && (
+        <LyricsModal
+          isOpen={lyricsModalOpen}
+          onClose={() => setLyricsModalOpen(false)}
+          trackTitle={selectedTrackLyrics.title}
+          lyrics={selectedTrackLyrics.lyrics}
+        />
+      )}
     </>
   );
 }
