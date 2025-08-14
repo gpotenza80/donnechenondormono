@@ -233,6 +233,45 @@ Per me
 Basta uno sguardo 
 E 
 E ritorna il sole.`
+  },
+  "lemiecatene": {
+    title: "Le mie catene",
+    lyrics: `No!
+Non saran mica le stelle
+a farmi male:
+ci ha pensato la mia vita,
+senza la libertà.
+
+No!
+Non ho più caramelle
+e, tra le mani,
+ho soltanto la cartina,
+rotta come la mia pelle.
+
+Quando ero bambina mi han detto:
+"Hai il mondo tra le mani."
+Ed ora io cosa farò?
+Senza dolore, senza amore,
+non c'è Dio che mi comprenda la notte,
+rinchiusa tra le mura,
+senza arte né parte.
+
+No!
+Dove son le mie catene?
+A scontare sono state le mie pene,
+e quante ne ho contate!
+
+E già, cos'è che voglio, lo so:
+il male non è più il bene per me,
+e voglio andare via tra la malinconia,
+Però sono sola, chiusa dentro questa vita.
+
+No!
+Portatemi un mantello, un cappello e una cesoia
+per romper le catene del mio boia,
+per diventare un'altra nella storia,
+per ammazzare il mondo con la gioia,
+per scrivere un finale che non muoia.`
   }
   // Altri testi verranno aggiunti qui
 };
