@@ -58,7 +58,7 @@ const tracks = [
   {
     title: "Londra 2000",
     time: "04:00",
-    cover: "/lovable-uploads/bb3417b8-b4b4-4aa5-af08-e9faf1fa9ae6.png",
+    cover: "/lovable-uploads/3aac9be1-6a82-42b8-9027-872eda669c4a.png",
     caption:
       "Cartolina emotiva: ricordi e città come specchi.",
   },
