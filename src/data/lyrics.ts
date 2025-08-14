@@ -3,6 +3,9 @@ export interface LyricsData {
   lyrics: string;
 }
 
+// Version for cache busting
+export const LYRICS_VERSION = "2025-01-14-v2";
+
 export const lyricsData: Record<string, LyricsData> = {
   "disconnessa": {
     title: "Disconnessa",
@@ -390,5 +393,12 @@ export function getLyricsKey(title: string): string {
 // Funzione per ottenere i testi di una traccia
 export function getTrackLyrics(title: string): LyricsData | null {
   const key = getLyricsKey(title);
-  return lyricsData[key] || null;
+  const result = lyricsData[key] || null;
+  
+  // Debug logging for production
+  if (import.meta.env.MODE === 'production') {
+    console.log(`[Lyrics ${LYRICS_VERSION}] Loading: ${title} -> ${key}`, result ? '✓' : '✗');
+  }
+  
+  return result;
 }
