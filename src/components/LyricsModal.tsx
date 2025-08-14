@@ -37,6 +37,7 @@ export function LyricsModal({
   const [userScrolled, setUserScrolled] = useState(false);
   const autoScrollTimeoutRef = useRef<NodeJS.Timeout>();
   const isAutoScrollingRef = useRef(false); // Track when we're auto-scrolling
+  const lastScrollTimeRef = useRef(0); // Throttle scroll updates
 
   // Attiva automaticamente l'autoscroll se è la traccia corrente
   useEffect(() => {
@@ -81,6 +82,13 @@ export function LyricsModal({
       return;
     }
 
+    // Throttle scroll updates to every 500ms for smoother movement
+    const now = Date.now();
+    if (now - lastScrollTimeRef.current < 500) {
+      return;
+    }
+    lastScrollTimeRef.current = now;
+
     // currentPosition è già normalizzato 0-1 dal TrackGrid
     // Usa direttamente questo valore per il progresso
     const progress = Math.min(Math.max(currentPosition, 0), 1);
@@ -97,13 +105,16 @@ export function LyricsModal({
     // Mark as auto-scrolling to prevent manual scroll detection
     isAutoScrollingRef.current = true;
     
-    // Perform the scroll instantly (no smooth scroll to avoid conflicts)
-    container.scrollTop = targetScrollTop;
+    // Use smooth scrolling for gradual movement
+    container.scrollTo({
+      top: targetScrollTop,
+      behavior: 'smooth'
+    });
     
-    // Reset auto-scrolling flag after a short delay
+    // Reset auto-scrolling flag after scroll completes
     setTimeout(() => {
       isAutoScrollingRef.current = false;
-    }, 50);
+    }, 800); // Longer timeout to account for smooth scroll duration
     
   }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
 
