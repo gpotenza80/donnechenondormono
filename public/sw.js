@@ -1,4 +1,4 @@
-const CACHE_NAME = 'donne-che-non-dormono-v1';
+const CACHE_NAME = 'donne-che-non-dormono-v20250814';
 const urlsToCache = [
   '/',
   '/index.html',
