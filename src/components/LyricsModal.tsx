@@ -65,13 +65,9 @@ export function LyricsModal({
       return;
     }
 
-    // Convert duration from milliseconds to seconds if needed
-    const durationInSeconds = duration > 1000 ? duration / 1000 : duration;
-    
-    if (durationInSeconds === 0 || currentPosition < 0) {
+    if (duration === 0 || currentPosition < 0) {
       console.log('[LyricsModal] Skip scroll - invalid duration/position:', { 
         duration, 
-        durationInSeconds,
         currentPosition 
       });
       return;
@@ -85,14 +81,14 @@ export function LyricsModal({
       return;
     }
 
-    // Calcola il progresso come percentuale
-    const progress = Math.min(Math.max(currentPosition / durationInSeconds, 0), 1);
+    // currentPosition è già normalizzato 0-1 dal TrackGrid
+    // Usa direttamente questo valore per il progresso
+    const progress = Math.min(Math.max(currentPosition, 0), 1);
     const targetScrollTop = Math.round(scrollHeight * progress);
 
     console.log('[LyricsModal] Auto scrolling:', { 
-      currentPosition: Math.round(currentPosition * 10) / 10,
+      currentPosition: Math.round(currentPosition * 1000) / 1000,
       duration: Math.round(duration),
-      durationInSeconds: Math.round(durationInSeconds),
       progress: Math.round(progress * 100) + '%', 
       targetScrollTop,
       scrollHeight
@@ -101,13 +97,13 @@ export function LyricsModal({
     // Mark as auto-scrolling to prevent manual scroll detection
     isAutoScrollingRef.current = true;
     
-    // Perform the scroll
+    // Perform the scroll instantly (no smooth scroll to avoid conflicts)
     container.scrollTop = targetScrollTop;
     
     // Reset auto-scrolling flag after a short delay
     setTimeout(() => {
       isAutoScrollingRef.current = false;
-    }, 100);
+    }, 50);
     
   }, [autoScrollEnabled, isCurrentTrack, isPlaying, currentPosition, duration, userScrolled]);
 
