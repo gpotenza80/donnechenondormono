@@ -51,7 +51,7 @@ const tracks = [
   {
     title: "Pena - Italiano",
     time: "03:00",
-    cover: "/lovable-uploads/a987e938-ebfb-45fc-a615-15783e121b2f.png",
+    cover: "/lovable-uploads/620d31bd-53ad-4350-8915-9f9c0b3c6172.png",
     caption:
       "Tango moderno di attesa e ferita. Versione in italiano.",
   },
