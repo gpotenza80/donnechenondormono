@@ -31,7 +31,7 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-Sitemap: https://www.donnechenondormono.it/sitemap.xml
+Sitemap: https://gpotenza80.github.io/donnechenondormono-website/sitemap.xml
 
 # Allow AI crawlers and tools
 User-agent: PerplexityBot
