@@ -8,13 +8,20 @@ export default function ConceptSection() {
     const tracksSection = document.getElementById('brani');
     if (tracksSection) {
       tracksSection.scrollIntoView({ behavior: 'smooth' });
+      // Mappatura corretta: la timeline ha 7 slot ma l'array tracks ha 8 elementi
+      // Slot 6 della timeline ("Londra 2000") deve corrispondere all'indice 7 dell'array tracks
+      let actualTrackIndex = trackIndex;
+      if (trackIndex === 6) { // "Londra 2000" nella timeline
+        actualTrackIndex = 7; // Corrisponde all'indice 7 nell'array tracks
+      }
+      
       // Simula click sulla traccia specifica dopo lo scroll
       setTimeout(() => {
         try { 
-          (window as any).playAlbumTrack?.(trackIndex); 
+          (window as any).playAlbumTrack?.(actualTrackIndex); 
         } catch {}
         try { 
-          window.dispatchEvent(new CustomEvent("play-track-index", { detail: { index: trackIndex } })); 
+          window.dispatchEvent(new CustomEvent("play-track-index", { detail: { index: actualTrackIndex } })); 
         } catch {}
       }, 500);
     }
