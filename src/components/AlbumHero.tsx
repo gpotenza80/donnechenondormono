@@ -31,9 +31,9 @@ export default function AlbumHero() {
   }, []);
 
   return (
-    <header className="relative overflow-hidden">
-      <nav className="container mx-auto flex items-center justify-between py-6">
-        <a href="#top" className="font-semibold tracking-wide">
+    <header className="relative overflow-hidden" role="banner">
+      <nav className="container mx-auto flex items-center justify-between py-6" role="navigation" aria-label="Menu principale">
+        <a href="#top" className="font-semibold tracking-wide" aria-label="Torna in cima">
           JackPot
         </a>
         <ul className="hidden md:flex items-center gap-6 text-sm">
@@ -47,27 +47,29 @@ export default function AlbumHero() {
         </ul>
       </nav>
 
-      <div
+      <section
         onMouseMove={onMove}
         className="relative container mx-auto grid gap-8 md:gap-12 lg:grid-cols-2 items-center pt-12 md:pt-20 pb-7 md:pb-10 lg:pb-12"
+        aria-labelledby="main-title"
       >
         <div className="relative z-10">
-          <h1 className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
+          <h1 id="main-title" className="font-bold leading-tight text-[clamp(34px,6vw,56px)] mb-4">
             Donne che non dormono
           </h1>
-          <p className="max-w-xl text-base md:text-lg mb-5 text-left">
+          <p className="max-w-xl text-base md:text-lg mb-5 text-left" role="text">
             <span className="block">Sette donne.</span>
             <span className="block">Sette canzoni.</span>
             <span className="block">Sette ore della notte.</span>
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4" role="group" aria-label="Azioni principali">
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
-              <a href="#brani" onClick={playFirst}>Ascolta l'album</a>
+              <a href="#brani" onClick={playFirst} aria-describedby="play-description">Ascolta l'album</a>
             </Button>
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
-              <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer">Apri su SoundCloud</a>
+              <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer" aria-label="Apri playlist su SoundCloud (nuova finestra)">Apri su SoundCloud</a>
             </Button>
           </div>
+          <span id="play-description" className="sr-only">Avvia la riproduzione dell'album e scorri alla sezione brani</span>
           </div>
 
         <div className="relative group cursor-pointer" onClick={playFirst}>
@@ -85,7 +87,7 @@ export default function AlbumHero() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <div
         aria-hidden

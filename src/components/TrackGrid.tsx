@@ -293,7 +293,7 @@ export default function TrackGrid() {
   return (
     <>
       <span id="brani" className="block h-0" aria-hidden="true" />
-      <section id="ascolta" className="container mx-auto py-10 md:py-14">
+      <section id="ascolta" className="container mx-auto py-10 md:py-14" aria-labelledby="tracks-title">
         <div className="grid gap-10">
           
           {/* Player nascosto che gestisce l'audio in background */}
@@ -365,16 +365,24 @@ export default function TrackGrid() {
 
           {/* Griglia tracce */}
           <div>
-            <h3 className="text-xl font-semibold mb-6">Tracce</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <h2 id="tracks-title" className="text-xl font-semibold mb-6">Tracce dell'album</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" role="list" aria-label="Lista tracce musicali">
               {tracks.map((t, idx) => (
-                <Card 
-                  key={t.title} 
-                  id={t.time === "03:00" ? (idx === 5 ? "h03" : undefined) : `h${t.time.slice(0,2)}`} 
-                  ref={(el) => (cardRefs.current[idx] = el)} 
-                  tabIndex={-1}
-                  className={playingIndex === idx && isPlaying ? "ring-2 ring-primary" : ""}
+                <article 
+                  key={t.title}
+                  role="listitem"
+                  itemScope
+                  itemType="https://schema.org/MusicRecording"
                 >
+                  <meta itemProp="position" content={String(idx + 1)} />
+                  <meta itemProp="name" content={t.title} />
+                  <meta itemProp="description" content={t.caption} />
+                  <Card 
+                    id={t.time === "03:00" ? (idx === 5 ? "h03" : undefined) : `h${t.time.slice(0,2)}`} 
+                    ref={(el) => (cardRefs.current[idx] = el)} 
+                    tabIndex={-1}
+                    className={playingIndex === idx && isPlaying ? "ring-2 ring-primary" : ""}
+                  >
                   <CardHeader className="p-0">
                     <div
                       className="group relative aspect-square overflow-hidden rounded-t-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary bg-muted"
@@ -407,22 +415,35 @@ export default function TrackGrid() {
                     </div>
                   </CardHeader>
                   <CardContent className="pt-4">
-                    <CardTitle className="text-base">
+                    <CardTitle className="text-base" itemProp="name">
                       {String(idx + 1).padStart(2, "0")} — {t.title}
                     </CardTitle>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <div className="mt-2 text-sm text-muted-foreground">
                       <button
                         type="button"
                         className="story-link inline-flex items-center font-medium text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
                         aria-label={`Ascolta ${t.title} alle ${t.time}`}
                         onClick={() => handleCoverClick(idx)}
                       >
-                        {t.time}
+                        <time dateTime={`${t.time}:00`} className="font-mono">{t.time}</time>
                       </button>
-                      {" — "}{t.caption}
-                    </p>
+                      <span aria-hidden="true"> — </span>
+                      <span itemProp="description">{t.caption}</span>
+                    </div>
+                    <div className="mt-3 flex gap-2">
+                      <a 
+                        href={`/pdf/${t.title.toLowerCase().replace(/[àáâäã]/g, 'a').replace(/[èéêë]/g, 'e').replace(/[,'']/g, '').replace(/[\s]/g, '-').replace(/[ñ]/g, 'n').replace(/[ç]/g, 'c')}.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+                        aria-label={`Leggi il testo di ${t.title} (PDF)`}
+                      >
+                        Testo PDF
+                      </a>
+                    </div>
                   </CardContent>
-                </Card>
+                  </Card>
+                </article>
               ))}
             </div>
           </div>
