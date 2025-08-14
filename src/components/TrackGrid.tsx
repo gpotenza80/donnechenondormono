@@ -465,6 +465,10 @@ export default function TrackGrid() {
           onClose={() => setLyricsModalOpen(false)}
           trackTitle={selectedTrackLyrics.title}
           lyrics={selectedTrackLyrics.lyrics}
+          isPlaying={isPlaying}
+          currentPosition={position}
+          duration={duration}
+          isCurrentTrack={selectedTrackLyrics.title === tracks[playingIndex || 0]?.title}
         />
       )}
     </>
