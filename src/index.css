@@ -148,9 +148,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-sans);
+    @apply bg-background text-foreground font-sans;
     line-height: 1.55;
+    min-height: 100vh;
   }
 
   h1, h2, h3 {
