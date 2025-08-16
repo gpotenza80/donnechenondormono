@@ -17,12 +17,27 @@ export default function AboutSection() {
         
         <div className="mt-8 pt-6 border-t">
           <h3 className="text-lg font-semibold mb-3">Contatti</h3>
-          <a 
-            href="mailto:giovanni.potenza.autore@gmail.com"
-            className="text-foreground hover:underline underline-offset-4"
-          >
-            giovanni.potenza.autore@gmail.com
-          </a>
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a 
+                href="mailto:giovanni.potenza.autore@gmail.com?subject=Donne che non dormono - Contatto&body=Ciao Giovanni,%0D%0A%0D%0AScrivo riguardo al progetto 'Donne che non dormono'..."
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-sm font-medium"
+              >
+                📧 Email
+              </a>
+              <a 
+                href="https://wa.me/393276693629?text=Ciao%20Giovanni,%20scrivo%20riguardo%20al%20progetto%20'Donne%20che%20non%20dormono'..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium"
+              >
+                💬 WhatsApp
+              </a>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              giovanni.potenza.autore@gmail.com
+            </p>
+          </div>
         </div>
       </div>
     </section>
