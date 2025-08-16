@@ -34,9 +34,6 @@ export default function AboutSection() {
                 💬 WhatsApp
               </a>
             </div>
-            <p className="text-sm text-muted-foreground">
-              giovanni.potenza.autore@gmail.com
-            </p>
           </div>
         </div>
       </div>
