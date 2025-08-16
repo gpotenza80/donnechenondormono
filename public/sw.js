@@ -1,9 +1,9 @@
 const CACHE_NAME = 'donne-che-non-dormono-v20250815';
 const urlsToCache = [
-  '/donnechenondormono/',
-  '/donnechenondormono/index.html',
-  '/donnechenondormono/manifest.json',
-  '/donnechenondormono/og-image.jpg'
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/og-image.jpg'
 ];
 
 // Install Service Worker
