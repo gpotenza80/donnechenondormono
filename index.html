@@ -19,9 +19,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Donne che non dormono" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" href="/lovable-uploads/551d53c7-c762-40f4-a2d0-2f6f55e867af.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/lovable-uploads/551d53c7-c762-40f4-a2d0-2f6f55e867af.png" />
+    <link rel="manifest" href="/donnechenondormono/manifest.json" />
+    <link rel="icon" href="/donnechenondormono/lovable-uploads/551d53c7-c762-40f4-a2d0-2f6f55e867af.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/donnechenondormono/lovable-uploads/551d53c7-c762-40f4-a2d0-2f6f55e867af.png" />
 
     <!-- OpenGraph / Facebook -->
     <meta property="og:type" content="music.album" />
@@ -285,13 +285,13 @@
     </noscript>
     
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/donnechenondormono/src/main.tsx"></script>
     
     <!-- Register Service Worker -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('/donnechenondormono/sw.js')
             .then((registration) => {
               console.log('SW registered: ', registration);
             })
