@@ -1,30 +1,16 @@
-const scrollToSection = (sectionId: string) => {
-  console.log(`[Footer] Tentativo scroll a: ${sectionId}`);
+const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  e.preventDefault();
+  console.log(`[Footer] Click su ${sectionId}`);
   
   const element = document.getElementById(sectionId);
   if (element) {
     console.log(`[Footer] Elemento trovato:`, element);
-    
-    // Prova entrambi i metodi
-    try {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-      console.log(`[Footer] ScrollIntoView eseguito per ${sectionId}`);
-    } catch (error) {
-      console.error(`[Footer] Errore scrollIntoView:`, error);
-      // Fallback
-      const headerHeight = 80;
-      const elementPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    element.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
   } else {
     console.error(`[Footer] Elemento con ID '${sectionId}' non trovato`);
-    console.log('[Footer] Elementi disponibili:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
   }
 };
 
@@ -34,33 +20,27 @@ export default function SiteFooter() {
       <div className="container mx-auto py-8 text-sm text-muted-foreground flex flex-col md:flex-row items-center justify-between gap-3">
         <p>© {new Date().getFullYear()} JackPot — Donne che non dormono</p>
         <nav className="flex items-center gap-4">
-          <button 
-            onClick={() => {
-              console.log('[Footer] Click su Ascolta');
-              scrollToSection('ascolta');
-            }}
+          <a 
+            href="#ascolta"
+            onClick={(e) => handleNavClick(e, 'ascolta')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Ascolta
-          </button>
-          <button 
-            onClick={() => {
-              console.log('[Footer] Click su Concept');
-              scrollToSection('concept');
-            }}
+          </a>
+          <a 
+            href="#concept"
+            onClick={(e) => handleNavClick(e, 'concept')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Concept
-          </button>
-          <button 
-            onClick={() => {
-              console.log('[Footer] Click su Chi sono');
-              scrollToSection('chi-sono');
-            }}
+          </a>
+          <a 
+            href="#chi-sono"
+            onClick={(e) => handleNavClick(e, 'chi-sono')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Chi sono
-          </button>
+          </a>
         </nav>
       </div>
     </footer>
