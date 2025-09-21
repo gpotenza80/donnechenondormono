@@ -1,7 +1,13 @@
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    const headerHeight = 80; // Offset per header fisso
+    const elementPosition = element.offsetTop - headerHeight;
+    
+    window.scrollTo({
+      top: elementPosition,
+      behavior: 'smooth'
+    });
   }
 };
 
@@ -13,19 +19,19 @@ export default function SiteFooter() {
         <nav className="flex items-center gap-4">
           <button 
             onClick={() => scrollToSection('ascolta')}
-            className="hover:underline underline-offset-4 cursor-pointer"
+            className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Ascolta
           </button>
           <button 
             onClick={() => scrollToSection('concept')}
-            className="hover:underline underline-offset-4 cursor-pointer"
+            className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Concept
           </button>
           <button 
             onClick={() => scrollToSection('chi-sono')}
-            className="hover:underline underline-offset-4 cursor-pointer"
+            className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Chi sono
           </button>
