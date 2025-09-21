@@ -4,7 +4,7 @@ const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: strin
   
   const element = document.getElementById(sectionId);
   if (element) {
-    console.log(`[Footer] Elemento trovato:`, element);
+    console.log(`[Footer] Elemento trovato per ${sectionId}`);
     element.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
@@ -21,21 +21,21 @@ export default function SiteFooter() {
         <p>© {new Date().getFullYear()} JackPot — Donne che non dormono</p>
         <nav className="flex items-center gap-4">
           <a 
-            href="#ascolta"
+            href="/"
             onClick={(e) => handleNavClick(e, 'ascolta')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Ascolta
           </a>
           <a 
-            href="#concept"
+            href="/"
             onClick={(e) => handleNavClick(e, 'concept')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
             Concept
           </a>
           <a 
-            href="#chi-sono"
+            href="/"
             onClick={(e) => handleNavClick(e, 'chi-sono')}
             className="hover:underline underline-offset-4 cursor-pointer transition-colors hover:text-foreground"
           >
