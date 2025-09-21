@@ -4,9 +4,9 @@ import { useCallback, useState } from "react";
 import { Play } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "#ascolta", label: "Ascolta" },
-  { href: "#concept", label: "Concept" },
-  { href: "#chi-sono", label: "Chi sono" },
+  { href: "ascolta", label: "Ascolta" },
+  { href: "concept", label: "Concept" },
+  { href: "chi-sono", label: "Chi sono" },
 ];
 
 export default function AlbumHero() {
@@ -30,16 +30,33 @@ export default function AlbumHero() {
     target?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
+  const scrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <header className="relative overflow-hidden" role="banner">
       <nav className="container mx-auto flex items-center justify-between py-6" role="navigation" aria-label="Menu principale">
-        <a href="#top" className="font-semibold tracking-wide" aria-label="Torna in cima">
+        <a href="/" onClick={scrollToTop} className="font-semibold tracking-wide" aria-label="Torna in cima">
           JackPot
         </a>
         <ul className="hidden md:flex items-center gap-6 text-sm">
           {NAV_LINKS.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:underline underline-offset-4">
+              <a 
+                href="/" 
+                onClick={(e) => scrollToSection(e, l.href)}
+                className="hover:underline underline-offset-4"
+              >
                 {l.label}
               </a>
             </li>
@@ -63,7 +80,7 @@ export default function AlbumHero() {
           </p>
           <div className="flex flex-wrap gap-4" role="group" aria-label="Azioni principali">
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
-              <a href="#brani" onClick={playFirst} aria-describedby="play-description">Ascolta l'album</a>
+              <a href="/" onClick={playFirst} aria-describedby="play-description">Ascolta l'album</a>
             </Button>
             <Button asChild variant="hero" size="lg" className="h-12 w-[200px] md:w-[220px]">
               <a href="https://on.soundcloud.com/EeW4KykuGF4zC6Y7no" target="_blank" rel="noopener noreferrer" aria-label="Apri playlist su SoundCloud (nuova finestra)">Apri su SoundCloud</a>
